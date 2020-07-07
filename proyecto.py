@@ -20,7 +20,7 @@ class Cursor(pygame.Rect):
 cursor1 = Cursor()
 
 ################################################3
-#botones
+#botones de los rocks
 class Boton(pygame.sprite.Sprite):
     def __init__(self,imagen1,imagen2,x,y):
         self.imagen_normal = imagen1
@@ -30,7 +30,6 @@ class Boton(pygame.sprite.Sprite):
         self.rect.left,self.rect.top = (x,y)
     def cambio(self,imagen):
         self.imagen_actual = imagen
-        
     def seleccion(self,pantalla,cursor):
         if cursor.colliderect(self.rect):
             self.imagen_actual = self.imagen_seleccion
@@ -48,6 +47,16 @@ base1 = pygame.image.load("cuadro con torre1.png")
 ##################################################
 #establece si hay algo seleccionado
 escogido = base
+#matriz madre
+mesa = [[base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base],
+        [base,base,base,base,base]]
 ##########################################3#######
 #define el boton de la torre 1
 boton1= Boton(torre1,torre1_2,20,20)
@@ -69,14 +78,16 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if cursor1.colliderect(boton1.rect):
                 escogido  = base1
-                boton3= Boton(base,escogido ,31,101)
                 boton1.cambio(torre1_2)
         #evento para camcelar la selaccion
         if event.type == pygame.MOUSEBUTTONDOWN:
             if cursor1.colliderect(boton2.rect):
-                boton3
                 escogido  = base
-                
+        #pone la escogida en el cuadro
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if cursor1.colliderect(boton3.rect):
+                mesa[0][0]= escogido
+                boton3= Boton(mesa[0][0],mesa[0][0] ,31,101)
                 
                 
     #imagende fondo
