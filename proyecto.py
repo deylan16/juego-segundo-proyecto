@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import sys
 from time import *
+from threading import Thread
 
 pygame.init()
 # creamos la ventana y le indicamos un titulo:
@@ -156,6 +157,8 @@ boton_water_rooks= Boton_rooks(water_rooks,water_rooks2,200,20)
 #Define el boton cancelar
 cancelar= Boton_rooks(cancelar1,cancelar1_2,20,80)
 ##########################################3#######
+#imagenes de los proyectiles
+arena = pygame.image.load("bala.png")
 #proyectiles
 lista_estado_cuadros = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_1,cuadro_1_2,cuadro_1_3,cuadro_1_4,cuadro_2_0,cuadro_2_1,cuadro_2_2,
                         cuadro_2_3,cuadro_2_4,cuadro_3_0,cuadro_3_1,cuadro_3_2,cuadro_3_3,cuadro_3_4,cuadro_4_0,cuadro_4_1,cuadro_4_2,cuadro_4_3,cuadro_4_4,cuadro_5_0,
@@ -168,26 +171,15 @@ class proyectiles(pygame.sprite.Sprite):
         self.rect = self.imagen_actual.get_rect()
         self.rect.left,self.rect.top = (x,y)
     def seleccion(self,pantalla,x,y):
-       while y != 400:
-            y +=1
-            pantalla.blit(self.imagen_actual,(x,y))
-#imagenes de los proyectiles
-arena = pygame.image.load("bala.png")
+        pantalla.blit(self.imagen_actual,(x,y))
+
 #creacion de protetiles
 bala1= proyectiles(arena ,10,10)
+x = 10
+y = 10
 
-def disparo():
-    for e in lista_estado_cuadros:
-        if e.estado_get() == cuadro_o_con_water_rooks:
-            x = e.coordsx_get()
-            y = e.coordsy_get()
-            bala1.seleccion(ventana,x,y)
-        if e == lista_estado_cuadros:
-            disparo()
-
-
-###################################################
-    
+#########################################################################################################################################################################
+##########################################################################################################################################################################   
 # el bucle principal del juego
 while True:
     # Posibles entradas del teclado y mouse
@@ -460,8 +452,12 @@ while True:
     cuadro_8_4.seleccion(ventana,cursor1)
     #############################################
     #proyectiles
-    disparo()
     
+    for e in lista_estado_cuadros:
+        
+        if e.estado_get() == cuadro_o_con_water_rooks:
+            y+=1
+            bala1.seleccion(ventana,x,y)
     
     
     #llama al cursor
