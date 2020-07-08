@@ -55,17 +55,53 @@ cuadro_0_2= Boton_cuadros(mesa[0][2] ,101,101)
 cuadro_0_3= Boton_cuadros(mesa[0][3] ,138,101)
 cuadro_0_4= Boton_cuadros(mesa[0][4] ,173,101)
 #fila1
-cuadro_1_0= Boton_cuadros(mesa[0][0] ,31,136)
-cuadro_1_1= Boton_cuadros(mesa[0][1] ,66,136)
-cuadro_1_2= Boton_cuadros(mesa[0][2] ,101,136)
-cuadro_1_3= Boton_cuadros(mesa[0][3] ,138,136)
-cuadro_1_4= Boton_cuadros(mesa[0][4] ,173,136)
+cuadro_1_0= Boton_cuadros(mesa[1][0] ,31,136)
+cuadro_1_1= Boton_cuadros(mesa[1][1] ,66,136)
+cuadro_1_2= Boton_cuadros(mesa[1][2] ,101,136)
+cuadro_1_3= Boton_cuadros(mesa[1][3] ,138,136)
+cuadro_1_4= Boton_cuadros(mesa[1][4] ,173,136)
 #fila2
 cuadro_2_0= Boton_cuadros(mesa[2][0] ,31,171)
 cuadro_2_1= Boton_cuadros(mesa[2][1] ,66,171)
 cuadro_2_2= Boton_cuadros(mesa[2][2] ,101,171)
 cuadro_2_3= Boton_cuadros(mesa[2][3] ,138,171)
 cuadro_2_4= Boton_cuadros(mesa[2][4] ,173,171)
+#fila3
+cuadro_3_0= Boton_cuadros(mesa[3][0] ,31,206)
+cuadro_3_1= Boton_cuadros(mesa[3][1] ,66,206)
+cuadro_3_2= Boton_cuadros(mesa[3][2] ,101,206)
+cuadro_3_3= Boton_cuadros(mesa[3][3] ,138,206)
+cuadro_3_4= Boton_cuadros(mesa[3][4] ,173,206)
+#fila4
+cuadro_4_0= Boton_cuadros(mesa[4][0] ,31,241)
+cuadro_4_1= Boton_cuadros(mesa[4][1] ,66,241)
+cuadro_4_2= Boton_cuadros(mesa[4][2] ,101,241)
+cuadro_4_3= Boton_cuadros(mesa[4][3] ,138,241)
+cuadro_4_4= Boton_cuadros(mesa[4][4] ,173,241)
+#fila5
+cuadro_5_0= Boton_cuadros(mesa[5][0] ,31,276)
+cuadro_5_1= Boton_cuadros(mesa[5][1] ,66,276)
+cuadro_5_2= Boton_cuadros(mesa[5][2] ,101,276)
+cuadro_5_3= Boton_cuadros(mesa[5][3] ,138,276)
+cuadro_5_4= Boton_cuadros(mesa[5][4] ,173,276)
+#fila6
+cuadro_6_0= Boton_cuadros(mesa[6][0] ,31,311)
+cuadro_6_1= Boton_cuadros(mesa[6][1] ,66,311)
+cuadro_6_2= Boton_cuadros(mesa[6][2] ,101,311)
+cuadro_6_3= Boton_cuadros(mesa[6][3] ,138,311)
+cuadro_6_4= Boton_cuadros(mesa[6][4] ,173,311)
+#fila7
+cuadro_7_0= Boton_cuadros(mesa[7][0] ,31,346)
+cuadro_7_1= Boton_cuadros(mesa[7][1] ,66,346)
+cuadro_7_2= Boton_cuadros(mesa[7][2] ,101,346)
+cuadro_7_3= Boton_cuadros(mesa[7][3] ,138,346)
+cuadro_7_4= Boton_cuadros(mesa[7][4] ,173,346)
+#fila8
+cuadro_8_0= Boton_cuadros(mesa[2][0] ,31,384)
+cuadro_8_1= Boton_cuadros(mesa[8][1] ,66,384)
+cuadro_8_2= Boton_cuadros(mesa[8][2] ,101,384)
+cuadro_8_3= Boton_cuadros(mesa[8][3] ,138,384)
+cuadro_8_4= Boton_cuadros(mesa[8][4] ,173,384)
 
 ################################################3
 #botones de los rooks
@@ -213,7 +249,102 @@ while True:
             if cursor1.colliderect(cuadro_2_4.rect):
                 mesa[2][4]= escogido
                 cuadro_2_4.cambio(mesa[2][4])
-                
+            #fila3
+            if cursor1.colliderect(cuadro_3_0.rect):
+                mesa[3][0]= escogido
+                cuadro_3_0.cambio(mesa[3][0])
+            if cursor1.colliderect(cuadro_3_1.rect):
+                mesa[3][1]= escogido
+                cuadro_3_1.cambio(mesa[3][1])
+            if cursor1.colliderect(cuadro_3_2.rect):
+                mesa[3][2]= escogido
+                cuadro_3_2.cambio(mesa[3][2])
+            if cursor1.colliderect(cuadro_3_3.rect):
+                mesa[3][3]= escogido
+                cuadro_3_3.cambio(mesa[3][3])
+            if cursor1.colliderect(cuadro_3_4.rect):
+                mesa[3][4]= escogido
+                cuadro_3_4.cambio(mesa[3][4])
+            #fila4
+            if cursor1.colliderect(cuadro_4_0.rect):
+                mesa[4][0]= escogido
+                cuadro_4_0.cambio(mesa[4][0])
+            if cursor1.colliderect(cuadro_4_1.rect):
+                mesa[4][1]= escogido
+                cuadro_4_1.cambio(mesa[4][1])
+            if cursor1.colliderect(cuadro_4_2.rect):
+                mesa[4][2]= escogido
+                cuadro_4_2.cambio(mesa[4][2])
+            if cursor1.colliderect(cuadro_4_3.rect):
+                mesa[4][3]= escogido
+                cuadro_4_3.cambio(mesa[4][3])
+            if cursor1.colliderect(cuadro_4_4.rect):
+                mesa[4][4]= escogido
+                cuadro_4_4.cambio(mesa[4][4])
+            #fila5
+            if cursor1.colliderect(cuadro_5_0.rect):
+                mesa[5][0]= escogido
+                cuadro_5_0.cambio(mesa[5][0])
+            if cursor1.colliderect(cuadro_5_1.rect):
+                mesa[5][1]= escogido
+                cuadro_5_1.cambio(mesa[5][1])
+            if cursor1.colliderect(cuadro_5_2.rect):
+                mesa[5][2]= escogido
+                cuadro_5_2.cambio(mesa[5][2])
+            if cursor1.colliderect(cuadro_5_3.rect):
+                mesa[5][3]= escogido
+                cuadro_5_3.cambio(mesa[5][3])
+            if cursor1.colliderect(cuadro_5_4.rect):
+                mesa[5][4]= escogido
+                cuadro_5_4.cambio(mesa[5][4])
+            #fila6
+            if cursor1.colliderect(cuadro_6_0.rect):
+                mesa[6][0]= escogido
+                cuadro_6_0.cambio(mesa[6][0])
+            if cursor1.colliderect(cuadro_6_1.rect):
+                mesa[6][1]= escogido
+                cuadro_6_1.cambio(mesa[6][1])
+            if cursor1.colliderect(cuadro_6_2.rect):
+                mesa[6][2]= escogido
+                cuadro_6_2.cambio(mesa[6][2])
+            if cursor1.colliderect(cuadro_6_3.rect):
+                mesa[6][3]= escogido
+                cuadro_6_3.cambio(mesa[6][3])
+            if cursor1.colliderect(cuadro_6_4.rect):
+                mesa[6][4]= escogido
+                cuadro_6_4.cambio(mesa[6][4])
+            #fila7
+            if cursor1.colliderect(cuadro_7_0.rect):
+                mesa[7][0]= escogido
+                cuadro_7_0.cambio(mesa[7][0])
+            if cursor1.colliderect(cuadro_7_1.rect):
+                mesa[7][1]= escogido
+                cuadro_7_1.cambio(mesa[7][1])
+            if cursor1.colliderect(cuadro_7_2.rect):
+                mesa[7][2]= escogido
+                cuadro_7_2.cambio(mesa[7][2])
+            if cursor1.colliderect(cuadro_7_3.rect):
+                mesa[7][3]= escogido
+                cuadro_7_3.cambio(mesa[7][3])
+            if cursor1.colliderect(cuadro_7_4.rect):
+                mesa[7][4]= escogido
+                cuadro_7_4.cambio(mesa[7][4])
+            #fila8
+            if cursor1.colliderect(cuadro_8_0.rect):
+                mesa[8][0]= escogido
+                cuadro_8_0.cambio(mesa[8][0])
+            if cursor1.colliderect(cuadro_8_1.rect):
+                mesa[8][1]= escogido
+                cuadro_8_1.cambio(mesa[8][1])
+            if cursor1.colliderect(cuadro_8_2.rect):
+                mesa[8][2]= escogido
+                cuadro_8_2.cambio(mesa[8][2])
+            if cursor1.colliderect(cuadro_8_3.rect):
+                mesa[8][3]= escogido
+                cuadro_8_3.cambio(mesa[8][3])
+            if cursor1.colliderect(cuadro_8_4.rect):
+                mesa[8][4]= escogido
+                cuadro_8_4.cambio(mesa[8][4])
                 
     #imagende fondo
     fondo = pygame.image.load("mesa.png").convert()
@@ -234,7 +365,7 @@ while True:
     cancelar.seleccion(ventana,cursor1)
     #############################################
     #cuadros
-    #fila1
+    #fila0
     cuadro_0_0.seleccion(ventana,cursor1)
     cuadro_0_1.seleccion(ventana,cursor1)
     cuadro_0_2.seleccion(ventana,cursor1)
@@ -252,6 +383,44 @@ while True:
     cuadro_2_2.seleccion(ventana,cursor1)
     cuadro_2_3.seleccion(ventana,cursor1)
     cuadro_2_4.seleccion(ventana,cursor1)
+    #fila3
+    cuadro_3_0.seleccion(ventana,cursor1)
+    cuadro_3_1.seleccion(ventana,cursor1)
+    cuadro_3_2.seleccion(ventana,cursor1)
+    cuadro_3_3.seleccion(ventana,cursor1)
+    cuadro_3_4.seleccion(ventana,cursor1)
+    #fila4
+    cuadro_4_0.seleccion(ventana,cursor1)
+    cuadro_4_1.seleccion(ventana,cursor1)
+    cuadro_4_2.seleccion(ventana,cursor1)
+    cuadro_4_3.seleccion(ventana,cursor1)
+    cuadro_4_4.seleccion(ventana,cursor1)
+    #fila5
+    cuadro_5_0.seleccion(ventana,cursor1)
+    cuadro_5_1.seleccion(ventana,cursor1)
+    cuadro_5_2.seleccion(ventana,cursor1)
+    cuadro_5_3.seleccion(ventana,cursor1)
+    cuadro_5_4.seleccion(ventana,cursor1)
+    #fila6
+    cuadro_6_0.seleccion(ventana,cursor1)
+    cuadro_6_1.seleccion(ventana,cursor1)
+    cuadro_6_2.seleccion(ventana,cursor1)
+    cuadro_6_3.seleccion(ventana,cursor1)
+    cuadro_6_4.seleccion(ventana,cursor1)
+    #fila7
+    cuadro_7_0.seleccion(ventana,cursor1)
+    cuadro_7_1.seleccion(ventana,cursor1)
+    cuadro_7_2.seleccion(ventana,cursor1)
+    cuadro_7_3.seleccion(ventana,cursor1)
+    cuadro_7_4.seleccion(ventana,cursor1)
+     #fila8
+    cuadro_8_0.seleccion(ventana,cursor1)
+    cuadro_8_1.seleccion(ventana,cursor1)
+    cuadro_8_2.seleccion(ventana,cursor1)
+    cuadro_8_3.seleccion(ventana,cursor1)
+    cuadro_8_4.seleccion(ventana,cursor1)
+    
+    
     #llama al cursor
     cursor1.sigue()
     #actualiza la pantalla
