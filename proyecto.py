@@ -21,14 +21,16 @@ c = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_
                         cuadro_5_1,cuadro_5_2,cuadro_5_3,cuadro_5_4,cuadro_6_0,cuadro_6_1,cuadro_6_2,cuadro_6_3,cuadro_6_4,cuadro_7_0,cuadro_7_1,cuadro_7_2,cuadro_7_3,
                         cuadro_7_4,cuadro_8_0,cuadro_8_1,cuadro_8_2,cuadro_8_3,cuadro_8_4]
 
-y = c[0].coordsy_get()
-x = c[0].coordsx_get()
+y0 = c[0].coordsy_get()
+x0 = c[0].coordsx_get()
+y1 = c[1].coordsy_get()
+x1 = c[1].coordsx_get()
 
-def lanza(estado,x,y):
+def lanza_agua(estado,x,y):
     if estado.estado_get() == cuadro_o_con_water_rooks:
         ventana.blit(agua,(x,y))
         sleep(1)
-        return lanza(estado,x,y)
+        return lanza_agua(estado,x,y)
     else:
         return 0
 
@@ -309,18 +311,25 @@ while True:
     #proyectiles
     if c[0].estado_get() == cuadro_o_con_water_rooks:
         estado = c[0]
-        if y < 400:
-            y +=1
-            hilo2 = Thread(target=lanza, args=(estado,x, y))
+        if y0 < 400:
+            y0 +=1
+            hilo2 = Thread(target=lanza_agua, args=(estado,x0, y0))
             hilo2.start()       
     if c[0].estado_get() == cuadro_oscuro:
-        y = c[0].coordsy_get()
+        y0 = c[0].coordsy_get()
+    if c[1].estado_get() == cuadro_o_con_water_rooks:
+        estado = c[1]
+        if y1 < 400:
+            y1 +=1
+            hilo2 = Thread(target=lanza_agua, args=(estado,x1, y1))
+            hilo2.start()       
+    if c[1].estado_get() == cuadro_oscuro:
+        y1 = c[1].coordsy_get()
 
     
     
     #llama al cursor
     cursor1.sigue()
     #actualiza la pantalla
-    sleep(1/1000)
     pygame.display.flip()
 
