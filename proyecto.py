@@ -158,25 +158,15 @@ boton_water_rooks= Boton_rooks(water_rooks,water_rooks2,200,20)
 cancelar= Boton_rooks(cancelar1,cancelar1_2,20,80)
 ##########################################3#######
 #imagenes de los proyectiles
-arena = pygame.image.load("bala.png")
+agua = pygame.image.load("bala.png")
 #proyectiles
-lista_estado_cuadros = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_1,cuadro_1_2,cuadro_1_3,cuadro_1_4,cuadro_2_0,cuadro_2_1,cuadro_2_2,
+c = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_1,cuadro_1_2,cuadro_1_3,cuadro_1_4,cuadro_2_0,cuadro_2_1,cuadro_2_2,
                         cuadro_2_3,cuadro_2_4,cuadro_3_0,cuadro_3_1,cuadro_3_2,cuadro_3_3,cuadro_3_4,cuadro_4_0,cuadro_4_1,cuadro_4_2,cuadro_4_3,cuadro_4_4,cuadro_5_0,
                         cuadro_5_1,cuadro_5_2,cuadro_5_3,cuadro_5_4,cuadro_6_0,cuadro_6_1,cuadro_6_2,cuadro_6_3,cuadro_6_4,cuadro_7_0,cuadro_7_1,cuadro_7_2,cuadro_7_3,
                         cuadro_7_4,cuadro_8_0,cuadro_8_1,cuadro_8_2,cuadro_8_3,cuadro_8_4]
-class proyectiles(pygame.sprite.Sprite):
-    def __init__(self,imagen1,x,y):
-        self.imagen_actual = imagen1
-        self.y = y
-        self.rect = self.imagen_actual.get_rect()
-        self.rect.left,self.rect.top = (x,y)
-    def seleccion(self,pantalla,x,y):
-        pantalla.blit(self.imagen_actual,(x,y))
 
-#creacion de protetiles
-bala1= proyectiles(arena ,10,10)
-x = 10
-y = 10
+y = c[0].coordsy_get()
+x = c[0].coordsx_get()
 
 #########################################################################################################################################################################
 ##########################################################################################################################################################################   
@@ -452,13 +442,18 @@ while True:
     cuadro_8_4.seleccion(ventana,cursor1)
     #############################################
     #proyectiles
+    if c[0].estado_get() == cuadro_o_con_water_rooks:
+        if y < 400:
+            y += 1
+            ventana.blit(agua,(x,y))
+            ventana.blit(agua,(x,y))
+        if y == 400:
+            y = c[0].coordsy_get()
+    if c[0].estado_get() == cuadro_oscuro:
+        y = c[0].coordsy_get()
     
-    for e in lista_estado_cuadros:
-        
-        if e.estado_get() == cuadro_o_con_water_rooks:
-            y+=1
-            bala1.seleccion(ventana,x,y)
-    
+            
+            
     
     #llama al cursor
     cursor1.sigue()
