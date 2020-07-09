@@ -3,159 +3,15 @@ from pygame.locals import *
 import sys
 from time import *
 from threading import Thread
+from rooks import *
+from cursor import *
+from cuadros import *
+
 
 pygame.init()
 # creamos la ventana y le indicamos un titulo:
 ventana = pygame.display.set_mode((267,440))
 pygame.display.set_caption("juego")
-#################################################3
-#cursor
-class Cursor(pygame.Rect):
-    def __init__(self):
-        pygame.Rect.__init__(self,0,0,1,1)
-    def sigue(self):
-        self.left,self.top = pygame.mouse.get_pos()
-#define el cursor
-cursor1 = Cursor()
-#################################################
-#botones de los cuadros
-class Boton_cuadros(pygame.sprite.Sprite):
-    def __init__(self,imagen1,x,y):
-        self.imagen_actual = imagen1
-        self.x = x
-        self.y = y
-        self.rect = self.imagen_actual.get_rect()
-        self.rect.left,self.rect.top = (x,y)
-    def cambio(self,imagen):
-        self.imagen_actual = imagen
-    def estado_get(self):
-        return self.imagen_actual
-    def coordsx_get(self):
-        return self.x
-    def coordsy_get(self):
-        return self.y
-    def seleccion(self,pantalla,cursor):
-        pantalla.blit(self.imagen_actual,self.rect)
-        
-        
-#imagenes de los cuadros
-cuadro_oscuro = pygame.image.load("cuadro oscuro.png")
-cuadro_o_con_fire_rooks = pygame.image.load("cuadro o con fire rooks.png")
-cuadro_o_con_rock_rooks = pygame.image.load("cuadro o con rock rooks.png")
-cuadro_o_con_sand_rooks = pygame.image.load("cuadro o con sand rooks.png")
-cuadro_o_con_water_rooks = pygame.image.load("cuadro o con water rooks.png")
-#establece si hay algo seleccionado
-escogido = cuadro_oscuro
-#matriz madre
-mesa = [[cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
-        [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]]
-#botones de los cuadro
-#fila0
-cuadro_0_0= Boton_cuadros(mesa[0][0] ,31,101)
-cuadro_0_1= Boton_cuadros(mesa[0][1] ,66,101)
-cuadro_0_2= Boton_cuadros(mesa[0][2] ,101,101)
-cuadro_0_3= Boton_cuadros(mesa[0][3] ,138,101)
-cuadro_0_4= Boton_cuadros(mesa[0][4] ,173,101)
-#fila1
-cuadro_1_0= Boton_cuadros(mesa[1][0] ,31,136)
-cuadro_1_1= Boton_cuadros(mesa[1][1] ,66,136)
-cuadro_1_2= Boton_cuadros(mesa[1][2] ,101,136)
-cuadro_1_3= Boton_cuadros(mesa[1][3] ,138,136)
-cuadro_1_4= Boton_cuadros(mesa[1][4] ,173,136)
-#fila2
-cuadro_2_0= Boton_cuadros(mesa[2][0] ,31,171)
-cuadro_2_1= Boton_cuadros(mesa[2][1] ,66,171)
-cuadro_2_2= Boton_cuadros(mesa[2][2] ,101,171)
-cuadro_2_3= Boton_cuadros(mesa[2][3] ,138,171)
-cuadro_2_4= Boton_cuadros(mesa[2][4] ,173,171)
-#fila3
-cuadro_3_0= Boton_cuadros(mesa[3][0] ,31,206)
-cuadro_3_1= Boton_cuadros(mesa[3][1] ,66,206)
-cuadro_3_2= Boton_cuadros(mesa[3][2] ,101,206)
-cuadro_3_3= Boton_cuadros(mesa[3][3] ,138,206)
-cuadro_3_4= Boton_cuadros(mesa[3][4] ,173,206)
-#fila4
-cuadro_4_0= Boton_cuadros(mesa[4][0] ,31,241)
-cuadro_4_1= Boton_cuadros(mesa[4][1] ,66,241)
-cuadro_4_2= Boton_cuadros(mesa[4][2] ,101,241)
-cuadro_4_3= Boton_cuadros(mesa[4][3] ,138,241)
-cuadro_4_4= Boton_cuadros(mesa[4][4] ,173,241)
-#fila5
-cuadro_5_0= Boton_cuadros(mesa[5][0] ,31,276)
-cuadro_5_1= Boton_cuadros(mesa[5][1] ,66,276)
-cuadro_5_2= Boton_cuadros(mesa[5][2] ,101,276)
-cuadro_5_3= Boton_cuadros(mesa[5][3] ,138,276)
-cuadro_5_4= Boton_cuadros(mesa[5][4] ,173,276)
-#fila6
-cuadro_6_0= Boton_cuadros(mesa[6][0] ,31,311)
-cuadro_6_1= Boton_cuadros(mesa[6][1] ,66,311)
-cuadro_6_2= Boton_cuadros(mesa[6][2] ,101,311)
-cuadro_6_3= Boton_cuadros(mesa[6][3] ,138,311)
-cuadro_6_4= Boton_cuadros(mesa[6][4] ,173,311)
-#fila7
-cuadro_7_0= Boton_cuadros(mesa[7][0] ,31,346)
-cuadro_7_1= Boton_cuadros(mesa[7][1] ,66,346)
-cuadro_7_2= Boton_cuadros(mesa[7][2] ,101,346)
-cuadro_7_3= Boton_cuadros(mesa[7][3] ,138,346)
-cuadro_7_4= Boton_cuadros(mesa[7][4] ,173,346)
-#fila8
-cuadro_8_0= Boton_cuadros(mesa[2][0] ,31,384)
-cuadro_8_1= Boton_cuadros(mesa[8][1] ,66,384)
-cuadro_8_2= Boton_cuadros(mesa[8][2] ,101,384)
-cuadro_8_3= Boton_cuadros(mesa[8][3] ,138,384)
-cuadro_8_4= Boton_cuadros(mesa[8][4] ,173,384)
-
-
-
-################################################3
-#botones de los rooks
-class Boton_rooks(pygame.sprite.Sprite):
-    def __init__(self,imagen1,imagen2,x,y):
-        self.imagen_normal = imagen1
-        self.imagen_seleccion = imagen2
-        self.imagen_actual = imagen1
-        self.rect = self.imagen_actual.get_rect()
-        self.rect.left,self.rect.top = (x,y)
-    def cambio(self,imagen):
-        self.imagen_normal = imagen
-    def seleccion(self,pantalla,cursor):
-        if cursor.colliderect(self.rect):
-            self.imagen_actual = self.imagen_seleccion
-        if  not cursor.colliderect(self.rect) :
-            self.imagen_actual = self.imagen_normal
-            
-        pantalla.blit(self.imagen_actual,self.rect)
-#imagenes de los Rocks
-fire_rooks = pygame.image.load("fire rooks.png")
-fire_rooks2 = pygame.image.load("fire rooks2.png")
-cancelar1 = pygame.image.load("cancelar1.png")
-cancelar1_2 = pygame.image.load("cancelar1.2.png")
-rock_rooks = pygame.image.load("rock rooks.png")
-rock_rooks2 = pygame.image.load("rock rooks2.png")
-sand_rooks = pygame.image.load("sand rooks.png")
-sand_rooks2 = pygame.image.load("sand rooks2.png")
-water_rooks = pygame.image.load("water rooks.png")
-water_rooks2 = pygame.image.load("water rooks2.png")
-
-
-##########################################3#######
-#define el boton de la torre de fuego
-boton_fire_rooks= Boton_rooks(fire_rooks,fire_rooks2,20,20)
-#define el boton de la torre de roca
-boton_rock_rooks= Boton_rooks(rock_rooks,rock_rooks2,80,20)
-#define el boton de la torre de arena
-boton_sand_rooks= Boton_rooks(sand_rooks,sand_rooks2,140,20)
-#define el boton de la torre de agua
-boton_water_rooks= Boton_rooks(water_rooks,water_rooks2,200,20)
-#Define el boton cancelar
-cancelar= Boton_rooks(cancelar1,cancelar1_2,20,80)
 ##########################################3#######
 #imagenes de los proyectiles
 agua = pygame.image.load("bala.png")
@@ -167,6 +23,15 @@ c = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_
 
 y = c[0].coordsy_get()
 x = c[0].coordsx_get()
+
+def lanza(estado,x,y):
+    if estado.estado_get() == cuadro_o_con_water_rooks:
+        ventana.blit(agua,(x,y))
+        sleep(1)
+        return lanza(estado,x,y)
+    else:
+        return 0
+
 
 #########################################################################################################################################################################
 ##########################################################################################################################################################################   
@@ -443,20 +308,19 @@ while True:
     #############################################
     #proyectiles
     if c[0].estado_get() == cuadro_o_con_water_rooks:
+        estado = c[0]
         if y < 400:
-            y += 1
-            ventana.blit(agua,(x,y))
-            ventana.blit(agua,(x,y))
-        if y == 400:
-            y = c[0].coordsy_get()
+            y +=1
+            hilo2 = Thread(target=lanza, args=(estado,x, y))
+            hilo2.start()       
     if c[0].estado_get() == cuadro_oscuro:
         y = c[0].coordsy_get()
+
     
-            
-            
     
     #llama al cursor
     cursor1.sigue()
     #actualiza la pantalla
+    sleep(1/1000)
     pygame.display.flip()
 
