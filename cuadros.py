@@ -22,8 +22,8 @@ class Boton_cuadros(pygame.sprite.Sprite):
         return self.y
     def disparos(self,x,y,img):
         if self.imagen_actual  == cuadro_o_con_water_rooks:
-            bala = proyectil(x,y,img)
-            self.lista_disparo.append(bala)
+                bala = proyectil(x,y,img)
+                self.lista_disparo.append(bala)
         
     def seleccion(self,pantalla,cursor):
         pantalla.blit(self.imagen_actual,self.rect)
@@ -119,8 +119,7 @@ bola_de_agua = pygame.image.load("bala.png")
 
 
 
-y0 = c[0].coordsy_get()
-x0 = c[0].coordsx_get()
+
 
 
 class proyectil(pygame.sprite.Sprite):

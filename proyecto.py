@@ -16,6 +16,12 @@ pygame.display.set_caption("juego")
 
 
 #########################################################################################################################################################################
+cuenta = 0
+def lanza(cuadro):
+    sleep(1)
+    cuadro.disparos(cuadro.coordsx_get(),cuadro.coordsy_get(),bola_de_agua)
+    lanza(cuadro)
+
 ##########################################################################################################################################################################   
 # el bucle principal del juego
 while True:
@@ -289,21 +295,20 @@ while True:
     cuadro_8_4.seleccion(ventana,cursor1)
     #############################################
     #proyectiles
-    if c[0].estado_get() == cuadro_o_con_water_rooks:
-        c[0].disparos(x0,y0,bola_de_agua)
-    if c[0].estado_get() == cuadro_oscuro:
-        y0 = c[0].coordsy_get()
-
+    
+    if c[0].estado_get() == cuadro_o_con_water_rooks and cuenta == 0:
+        hilo2 = Thread(target=lanza, args=(c[0]))
+        hilo2.start()
+        cuenta = 1
 
     if len(c[0].lista_disparo)>0:
         for ele in c[0].lista_disparo:
-            ele.direccion() 
-            ele.disparo(ventana)
+                ele.direccion() 
+                ele.disparo(ventana)
 
-            if ele.rect.top > 400:
-                c[0].lista_disparo.remove(ele)
-                
-    
+                if ele.rect.top > 400:
+                    c[0].lista_disparo.remove(ele)
+                    
     
     #llama al cursor
     cursor1.sigue()
