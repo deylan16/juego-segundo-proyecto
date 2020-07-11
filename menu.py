@@ -1,5 +1,5 @@
-import pygame,sys
-
+import pygame,sys 
+from proyecto import *
 #ventana de pygame
 mainClock = pygame.time.Clock()
 from pygame.locals import *
@@ -95,22 +95,7 @@ def menu_inicio():
 
 #Definicion de la ventana del juego
 def juego():
-    running = True
-    while running:
-        ventana.fill((0,0,0))
-        
-        escribir('juego', fuente,(255,0,0),ventana,20,20)
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                        running = False
-
-
-        pygame.display.update()
-        mainClock.tick(60)
+    empieza()
 
 #Definicion de la ventana de configuracion 
 def config():
@@ -182,6 +167,7 @@ def creditos():
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
+                        
                         running = False
 
 
