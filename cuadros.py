@@ -30,8 +30,7 @@ cuadro_o_con_fire_rooks = pygame.image.load("cuadro o con fire rooks.png")
 cuadro_o_con_rock_rooks = pygame.image.load("cuadro o con rock rooks.png")
 cuadro_o_con_sand_rooks = pygame.image.load("cuadro o con sand rooks.png")
 cuadro_o_con_water_rooks = pygame.image.load("cuadro o con water rooks.png")
-#establece si hay algo seleccionado
-escogido = cuadro_oscuro
+
 #matriz madre
 mesa = [[cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
         [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],

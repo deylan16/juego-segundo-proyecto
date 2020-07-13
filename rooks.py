@@ -301,13 +301,239 @@ def imprimir_3_4():
         rooks_puestos[19].disparos()
         sleep(1)
         imprimir_3_4()
+##################################
+#funciones y creacion del rook_4_0
+rook_4_0= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_4_0():  
+    hilo2 = Thread(target=imprimir_4_0, args=())
+    hilo2.start()
+
+def imprimir_4_0():
+    if mesa[4][0] != cuadro_oscuro:
+        rooks_puestos[20].disparos()
+        sleep(1)
+        imprimir_4_0()
+#funciones y creacion del rook_4_1
+rook_4_1= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_4_1():  
+    hilo2 = Thread(target=imprimir_4_1, args=())
+    hilo2.start()
+
+def imprimir_4_1():
+    if mesa[4][1] != cuadro_oscuro:
+        rooks_puestos[21].disparos()
+        sleep(1)
+        imprimir_4_1()
+#funciones y creacion del rook_4_2
+rook_4_2= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_4_2():  
+    hilo2 = Thread(target=imprimir_4_2, args=())
+    hilo2.start()
+
+def imprimir_4_2():
+    if mesa[4][2] != cuadro_oscuro:
+        rooks_puestos[22].disparos()
+        sleep(1)
+        imprimir_4_2()
+#funciones y creacion del rook_4_3
+rook_4_3= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_4_3():  
+    hilo2 = Thread(target=imprimir_4_3, args=())
+    hilo2.start()
+
+def imprimir_4_3():
+    if mesa[4][3] != cuadro_oscuro:
+        rooks_puestos[23].disparos()
+        sleep(1)
+        imprimir_4_3()
+#funciones y creacion del rook_4_4
+rook_4_4= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_4_4():  
+    hilo2 = Thread(target=imprimir_4_4, args=())
+    hilo2.start()
+
+def imprimir_4_4():
+    if mesa[4][4] != cuadro_oscuro:
+        rooks_puestos[24].disparos()
+        sleep(1)
+        imprimir_4_4()
+################################################
+#funciones y creacion del rook_5_0
+rook_5_0= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_5_0():  
+    hilo2 = Thread(target=imprimir_5_0, args=())
+    hilo2.start()
+
+def imprimir_5_0():
+    if mesa[5][0] != cuadro_oscuro:
+        rooks_puestos[25].disparos()
+        sleep(1)
+        imprimir_5_0()
+#funciones y creacion del rook_5_1
+rook_5_1= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_5_1():  
+    hilo2 = Thread(target=imprimir_5_1, args=())
+    hilo2.start()
+
+def imprimir_5_1():
+    if mesa[5][1] != cuadro_oscuro:
+        rooks_puestos[26].disparos()
+        sleep(1)
+        imprimir_5_1()
+#funciones y creacion del rook_5_2
+rook_5_2= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_5_2():  
+    hilo2 = Thread(target=imprimir_5_2, args=())
+    hilo2.start()
+
+def imprimir_5_2():
+    if mesa[5][2] != cuadro_oscuro:
+        rooks_puestos[27].disparos()
+        sleep(1)
+        imprimir_5_2()
+#funciones y creacion del rook_5_3
+rook_5_3= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_5_3():  
+    hilo2 = Thread(target=imprimir_5_3, args=())
+    hilo2.start()
+
+def imprimir_5_3():
+    if mesa[5][3] != cuadro_oscuro:
+        rooks_puestos[28].disparos()
+        sleep(1)
+        imprimir_5_3()
+#funciones y creacion del rook_5_4
+rook_5_4= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_5_4():  
+    hilo2 = Thread(target=imprimir_5_4, args=())
+    hilo2.start()
+
+def imprimir_5_4():
+    if mesa[5][4] != cuadro_oscuro:
+        rooks_puestos[29].disparos()
+        sleep(1)
+        imprimir_5_4()
+###################################
+#funciones y creacion del rook_6_0
+rook_6_0= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_6_0():  
+    hilo2 = Thread(target=imprimir_6_0, args=())
+    hilo2.start()
+
+def imprimir_6_0():
+    if mesa[6][0] != cuadro_oscuro:
+        rooks_puestos[30].disparos()
+        sleep(1)
+        imprimir_6_0()
+#funciones y creacion del rook_6_1
+rook_6_1= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_6_1():  
+    hilo2 = Thread(target=imprimir_6_1, args=())
+    hilo2.start()
+
+def imprimir_6_1():
+    if mesa[6][1] != cuadro_oscuro:
+        rooks_puestos[31].disparos()
+        sleep(1)
+        imprimir_6_1()
+#funciones y creacion del rook_6_2
+rook_6_2= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_6_2():  
+    hilo2 = Thread(target=imprimir_6_2, args=())
+    hilo2.start()
+
+def imprimir_6_2():
+    if mesa[6][2] != cuadro_oscuro:
+        rooks_puestos[32].disparos()
+        sleep(1)
+        imprimir_6_2()
+#funciones y creacion del rook_6_3
+rook_6_3= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_6_3():  
+    hilo2 = Thread(target=imprimir_6_3, args=())
+    hilo2.start()
+
+def imprimir_6_3():
+    if mesa[6][3] != cuadro_oscuro:
+        rooks_puestos[33].disparos()
+        sleep(1)
+        imprimir_6_3()
+#funciones y creacion del rook_6_4
+rook_6_4= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_6_4():  
+    hilo2 = Thread(target=imprimir_6_4, args=())
+    hilo2.start()
+
+def imprimir_6_4():
+    if mesa[6][4] != cuadro_oscuro:
+        rooks_puestos[34].disparos()
+        sleep(1)
+        imprimir_6_4()
+################################################
+#funciones y creacion del rook_7_0
+rook_7_0= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_7_0():  
+    hilo2 = Thread(target=imprimir_7_0, args=())
+    hilo2.start()
+
+def imprimir_7_0():
+    if mesa[7][0] != cuadro_oscuro:
+        rooks_puestos[35].disparos()
+        sleep(1)
+        imprimir_7_0()
+#funciones y creacion del rook_7_1
+rook_7_1= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_7_1():  
+    hilo2 = Thread(target=imprimir_7_1, args=())
+    hilo2.start()
+
+def imprimir_7_1():
+    if mesa[7][1] != cuadro_oscuro:
+        rooks_puestos[36].disparos()
+        sleep(1)
+        imprimir_7_1()
+#funciones y creacion del rook_7_2
+rook_7_2= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_7_2():  
+    hilo2 = Thread(target=imprimir_7_2, args=())
+    hilo2.start()
+
+def imprimir_7_2():
+    if mesa[7][2] != cuadro_oscuro:
+        rooks_puestos[37].disparos()
+        sleep(1)
+        imprimir_7_2()
+#funciones y creacion del rook_7_3
+rook_7_3= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_7_3():  
+    hilo2 = Thread(target=imprimir_7_3, args=())
+    hilo2.start()
+
+def imprimir_7_3():
+    if mesa[7][3] != cuadro_oscuro:
+        rooks_puestos[38].disparos()
+        sleep(1)
+        imprimir_7_3()
+#funciones y creacion del rook_7_4
+rook_7_4= rooks(cuadro_oscuro,-200,-200)
+def pone_rooks_7_4():  
+    hilo2 = Thread(target=imprimir_7_4, args=())
+    hilo2.start()
+
+def imprimir_7_4():
+    if mesa[7][4] != cuadro_oscuro:
+        rooks_puestos[39].disparos()
+        sleep(1)
+        imprimir_7_4()
+
+
         
 rooks_puestos = [rook_0_0,rook_0_1,rook_0_2,rook_0_3,rook_0_4,
                  rook_1_0,rook_1_1,rook_1_2,rook_1_3,rook_1_4,
                  rook_2_0,rook_2_1,rook_2_2,rook_2_3,rook_2_4,
-                 rook_3_0,rook_3_1,rook_3_2,rook_3_3,rook_3_4]
-                 #rook_4_0,rook_4_1,rook_4_2,rook_4_3,rook_4_4,
-                 #rook_5_0,rook_5_1,rook_5_2,rook_5_3,rook_5_4,
-                 #rook_6_0,rook_6_1,rook_6_2,rook_6_3,rook_6_4,
-                 #rook_7_0,rook_7_1,rook_7_2,rook_7_3,rook_7_4,
+                 rook_3_0,rook_3_1,rook_3_2,rook_3_3,rook_3_4,
+                 rook_4_0,rook_4_1,rook_4_2,rook_4_3,rook_4_4,
+                 rook_5_0,rook_5_1,rook_5_2,rook_5_3,rook_5_4,
+                 rook_6_0,rook_6_1,rook_6_2,rook_6_3,rook_6_4,
+                 rook_7_0,rook_7_1,rook_7_2,rook_7_3,rook_7_4]
                  #rook_8_0,rook_8_1,rook_8_2,rook_8_3,rook_8_4]

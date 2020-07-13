@@ -15,8 +15,10 @@ def empieza():
     pygame.display.set_caption("juego")
 
 
-
+    #establece si hay algo seleccionado
+    escogido = cuadro_oscuro
     #########################################################################################################################################################################
+
     cuenta_0_0 = 0                 
     cuenta_0_1 = 0
     cuenta_0_2 = 0
@@ -37,7 +39,26 @@ def empieza():
     cuenta_3_2 = 0
     cuenta_3_3 = 0
     cuenta_3_4 = 0
-
+    cuenta_4_0 = 0                 
+    cuenta_4_1 = 0
+    cuenta_4_2 = 0
+    cuenta_4_3 = 0
+    cuenta_4_4 = 0
+    cuenta_5_0 = 0                 
+    cuenta_5_1 = 0
+    cuenta_5_2 = 0
+    cuenta_5_3 = 0
+    cuenta_5_4 = 0
+    cuenta_6_0 = 0                 
+    cuenta_6_1 = 0
+    cuenta_6_2 = 0
+    cuenta_6_3 = 0
+    cuenta_6_4 = 0
+    cuenta_7_0 = 0                 
+    cuenta_7_1 = 0
+    cuenta_7_2 = 0
+    cuenta_7_3 = 0
+    cuenta_7_4 = 0
     ##########################################################################################################################################################################   
     # el bucle principal del juego
     hola = True
@@ -297,6 +318,30 @@ def empieza():
         rook_3_2.seleccion(ventana,cursor1)
         rook_3_3.seleccion(ventana,cursor1)
         rook_3_4.seleccion(ventana,cursor1)
+        #fila4
+        rook_4_0.seleccion(ventana,cursor1)
+        rook_4_1.seleccion(ventana,cursor1)
+        rook_4_2.seleccion(ventana,cursor1)
+        rook_4_3.seleccion(ventana,cursor1)
+        rook_4_4.seleccion(ventana,cursor1)
+        #fila5
+        rook_5_0.seleccion(ventana,cursor1)
+        rook_5_1.seleccion(ventana,cursor1)
+        rook_5_2.seleccion(ventana,cursor1)
+        rook_5_3.seleccion(ventana,cursor1)
+        rook_5_4.seleccion(ventana,cursor1)
+        #fila6
+        rook_6_0.seleccion(ventana,cursor1)
+        rook_6_1.seleccion(ventana,cursor1)
+        rook_6_2.seleccion(ventana,cursor1)
+        rook_6_3.seleccion(ventana,cursor1)
+        rook_6_4.seleccion(ventana,cursor1)
+        #fila7
+        rook_7_0.seleccion(ventana,cursor1)
+        rook_7_1.seleccion(ventana,cursor1)
+        rook_7_2.seleccion(ventana,cursor1)
+        rook_7_3.seleccion(ventana,cursor1)
+        rook_7_4.seleccion(ventana,cursor1)
        
         #verifica la matriz principal y pone los roocks
         ########################################
@@ -385,7 +430,7 @@ def empieza():
             cuenta_1_4 = 0
             rook_1_4.cambio(-200,-200,mesa[1][4])
         ########################################    
-        #fila0
+        #fila2
         #rook_2_0    
         if mesa[2][0] != cuadro_oscuro and cuenta_2_0 == 0:
             pone_rooks_2_0()
@@ -427,7 +472,7 @@ def empieza():
             cuenta_2_4 = 0
             rook_2_4.cambio(-200,-200,mesa[2][4])
         ########################################
-        #fila1
+        #fila3
         #rook_3_0    
         if mesa[3][0] != cuadro_oscuro and cuenta_3_0 == 0:
             pone_rooks_3_0()
@@ -469,6 +514,176 @@ def empieza():
         if mesa[3][4] == cuadro_oscuro:
             cuenta_3_4 = 0
             rook_3_4.cambio(-200,-200,mesa[3][4])
+        ##########################################################
+        #fila4
+        #rook_4_0    
+        if mesa[4][0] != cuadro_oscuro and cuenta_4_0 == 0:
+            pone_rooks_4_0()
+            cuenta_4_0 = 1
+            rook_4_0.cambio(cuadro_4_0.coordsx_get(),cuadro_4_0.coordsy_get(),mesa[4][0])
+        if mesa[4][0] == cuadro_oscuro:
+            cuenta_4_0 = 0
+            rook_4_0.cambio(-200,-200,mesa[4][0])
+        #rook_4_1
+        if mesa[4][1] != cuadro_oscuro and cuenta_4_1 == 0:
+            pone_rooks_4_1()
+            cuenta_4_1 = 1
+            rook_4_1.cambio(cuadro_4_1.coordsx_get(),cuadro_4_1.coordsy_get(),mesa[4][1])
+        if mesa[4][1] == cuadro_oscuro:
+            cuenta_4_1 = 0
+            rook_4_1.cambio(-200,-200,mesa[4][1])
+        #rook_4_2    
+        if mesa[4][2] != cuadro_oscuro and cuenta_4_2 == 0:
+            pone_rooks_4_2()
+            cuenta_4_2 = 1
+            rook_4_2.cambio(cuadro_4_2.coordsx_get(),cuadro_4_2.coordsy_get(),mesa[4][2])
+        if mesa[4][2] == cuadro_oscuro:
+            cuenta_4_2 = 0
+            rook_4_2.cambio(-200,-200,mesa[4][2])
+        #rook_4_3
+        if mesa[4][3] != cuadro_oscuro and cuenta_4_3 == 0:
+            pone_rooks_4_3()
+            cuenta_4_3 = 1
+            rook_4_3.cambio(cuadro_4_3.coordsx_get(),cuadro_4_3.coordsy_get(),mesa[4][3])
+        if mesa[4][3] == cuadro_oscuro:
+            cuenta_4_3 = 0
+            rook_4_3.cambio(-200,-200,mesa[4][3])
+        #rook_4_4
+        if mesa[4][4] != cuadro_oscuro and cuenta_4_4 == 0:
+            pone_rooks_4_4()
+            cuenta_4_4 = 1
+            rook_4_4.cambio(cuadro_4_4.coordsx_get(),cuadro_4_4.coordsy_get(),mesa[4][4])
+        if mesa[4][4] == cuadro_oscuro:
+            cuenta_4_4 = 0
+            rook_4_4.cambio(-200,-200,mesa[4][4])
+        ########################################
+        #fila5
+        #rook_5_0    
+        if mesa[5][0] != cuadro_oscuro and cuenta_5_0 == 0:
+            pone_rooks_5_0()
+            cuenta_5_0 = 1
+            rook_5_0.cambio(cuadro_5_0.coordsx_get(),cuadro_5_0.coordsy_get(),mesa[5][0])
+        if mesa[5][0] == cuadro_oscuro:
+            cuenta_5_0 = 0
+            rook_5_0.cambio(-200,-200,mesa[5][0])
+        #rook_5_1
+        if mesa[5][1] != cuadro_oscuro and cuenta_5_1 == 0:
+            pone_rooks_5_1()
+            cuenta_5_1 = 1
+            rook_5_1.cambio(cuadro_5_1.coordsx_get(),cuadro_5_1.coordsy_get(),mesa[5][1])
+        if mesa[5][1] == cuadro_oscuro:
+            cuenta_5_1 = 0
+            rook_5_1.cambio(-200,-200,mesa[5][1])
+        #rook_5_2    
+        if mesa[5][2] != cuadro_oscuro and cuenta_5_2 == 0:
+            pone_rooks_5_2()
+            cuenta_5_2 = 1
+            rook_5_2.cambio(cuadro_5_2.coordsx_get(),cuadro_5_2.coordsy_get(),mesa[5][2])
+        if mesa[5][2] == cuadro_oscuro:
+            cuenta_5_2 = 0
+            rook_5_2.cambio(-200,-200,mesa[5][2])
+        #rook_5_3    
+        if mesa[5][3] != cuadro_oscuro and cuenta_5_3 == 0:
+            pone_rooks_5_3()
+            cuenta_5_3 = 1
+            rook_5_3.cambio(cuadro_5_3.coordsx_get(),cuadro_5_3.coordsy_get(),mesa[5][3])
+        if mesa[5][3] == cuadro_oscuro:
+            cuenta_5_3 = 0
+            rook_5_3.cambio(-200,-200,mesa[5][3])
+
+        #rook_5_4
+        if mesa[5][4] != cuadro_oscuro and cuenta_5_4 == 0:
+            pone_rooks_5_4()
+            cuenta_5_4 = 1
+            rook_5_4.cambio(cuadro_5_4.coordsx_get(),cuadro_5_4.coordsy_get(),mesa[5][4])
+        if mesa[5][4] == cuadro_oscuro:
+            cuenta_5_4 = 0
+            rook_5_4.cambio(-200,-200,mesa[5][4])
+        ##########################################################3##
+        #fila6
+        #rook_6_0    
+        if mesa[6][0] != cuadro_oscuro and cuenta_6_0 == 0:
+            pone_rooks_6_0()
+            cuenta_6_0 = 1
+            rook_6_0.cambio(cuadro_6_0.coordsx_get(),cuadro_6_0.coordsy_get(),mesa[6][0])
+        if mesa[6][0] == cuadro_oscuro:
+            cuenta_6_0 = 0
+            rook_6_0.cambio(-200,-200,mesa[6][0])
+        #rook_6_1
+        if mesa[6][1] != cuadro_oscuro and cuenta_6_1 == 0:
+            pone_rooks_6_1()
+            cuenta_6_1 = 1
+            rook_6_1.cambio(cuadro_6_1.coordsx_get(),cuadro_6_1.coordsy_get(),mesa[6][1])
+        if mesa[6][1] == cuadro_oscuro:
+            cuenta_6_1 = 0
+            rook_6_1.cambio(-200,-200,mesa[6][1])
+        #rook_6_2    
+        if mesa[6][2] != cuadro_oscuro and cuenta_6_2 == 0:
+            pone_rooks_6_2()
+            cuenta_6_2 = 1
+            rook_6_2.cambio(cuadro_6_2.coordsx_get(),cuadro_6_2.coordsy_get(),mesa[6][2])
+        if mesa[6][2] == cuadro_oscuro:
+            cuenta_6_2 = 0
+            rook_6_2.cambio(-200,-200,mesa[6][2])
+        #rook_6_3
+        if mesa[6][3] != cuadro_oscuro and cuenta_6_3 == 0:
+            pone_rooks_6_3()
+            cuenta_6_3 = 1
+            rook_6_3.cambio(cuadro_6_3.coordsx_get(),cuadro_6_3.coordsy_get(),mesa[6][3])
+        if mesa[6][3] == cuadro_oscuro:
+            cuenta_6_3 = 0
+            rook_6_3.cambio(-200,-200,mesa[6][3])
+        #rook_6_4
+        if mesa[6][4] != cuadro_oscuro and cuenta_6_4 == 0:
+            pone_rooks_6_4()
+            cuenta_6_4 = 1
+            rook_6_4.cambio(cuadro_6_4.coordsx_get(),cuadro_6_4.coordsy_get(),mesa[6][4])
+        if mesa[6][4] == cuadro_oscuro:
+            cuenta_6_4 = 0
+            rook_6_4.cambio(-200,-200,mesa[6][4])
+        ########################################
+        #fila7
+        #rook_7_0    
+        if mesa[7][0] != cuadro_oscuro and cuenta_7_0 == 0:
+            pone_rooks_7_0()
+            cuenta_7_0 = 1
+            rook_7_0.cambio(cuadro_7_0.coordsx_get(),cuadro_7_0.coordsy_get(),mesa[7][0])
+        if mesa[7][0] == cuadro_oscuro:
+            cuenta_7_0 = 0
+            rook_7_0.cambio(-200,-200,mesa[7][0])
+        #rook_7_1
+        if mesa[7][1] != cuadro_oscuro and cuenta_7_1 == 0:
+            pone_rooks_7_1()
+            cuenta_7_1 = 1
+            rook_7_1.cambio(cuadro_7_1.coordsx_get(),cuadro_7_1.coordsy_get(),mesa[7][1])
+        if mesa[7][1] == cuadro_oscuro:
+            cuenta_7_1 = 0
+            rook_7_1.cambio(-200,-200,mesa[7][1])
+        #rook_7_2    
+        if mesa[7][2] != cuadro_oscuro and cuenta_7_2 == 0:
+            pone_rooks_7_2()
+            cuenta_7_2 = 1
+            rook_7_2.cambio(cuadro_7_2.coordsx_get(),cuadro_7_2.coordsy_get(),mesa[7][2])
+        if mesa[7][2] == cuadro_oscuro:
+            cuenta_7_2 = 0
+            rook_7_2.cambio(-200,-200,mesa[7][2])
+        #rook_7_3    
+        if mesa[7][3] != cuadro_oscuro and cuenta_7_3 == 0:
+            pone_rooks_7_3()
+            cuenta_7_3 = 1
+            rook_7_3.cambio(cuadro_7_3.coordsx_get(),cuadro_7_3.coordsy_get(),mesa[7][3])
+        if mesa[7][3] == cuadro_oscuro:
+            cuenta_7_3 = 0
+            rook_7_3.cambio(-200,-200,mesa[7][3])
+
+        #rook_7_4
+        if mesa[7][4] != cuadro_oscuro and cuenta_7_4 == 0:
+            pone_rooks_7_4()
+            cuenta_7_4 = 1
+            rook_7_4.cambio(cuadro_7_4.coordsx_get(),cuadro_7_4.coordsy_get(),mesa[7][4])
+        if mesa[7][4] == cuadro_oscuro:
+            cuenta_7_4 = 0
+            rook_7_4.cambio(-200,-200,mesa[7][4])
         #############################################################
         #proyectiles
         for a in rooks_puestos:
