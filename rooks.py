@@ -537,3 +537,27 @@ rooks_puestos = [rook_0_0,rook_0_1,rook_0_2,rook_0_3,rook_0_4,
                  rook_6_0,rook_6_1,rook_6_2,rook_6_3,rook_6_4,
                  rook_7_0,rook_7_1,rook_7_2,rook_7_3,rook_7_4]
                  #rook_8_0,rook_8_1,rook_8_2,rook_8_3,rook_8_4]
+
+#imagenes de los proyectiles
+bola_de_agua = pygame.image.load("agua.png")
+bola_de_fuego = pygame.image.load("fuego.png")
+bola_de_roca = pygame.image.load("roca.png")
+bola_de_arena = pygame.image.load("arena.png")
+
+class proyectil(pygame.sprite.Sprite):
+    def __init__(self,x,y,imagen):
+        self.imagen = imagen
+        self.rect = self.imagen.get_rect()
+        self.velocidad = -1
+        self.rect.top = y
+        self.rect.left = x
+    def chocan(self,objetox,objetoy):
+        if self.rect.top == objetoy and self.rect.left == objetox:
+            return True
+
+    def direccion(self):
+        self.rect.top = self.rect.top - self.velocidad
+    def disparo(self,ventana):
+        ventana.blit(self.imagen,self.rect)
+
+

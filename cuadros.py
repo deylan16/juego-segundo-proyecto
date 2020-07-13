@@ -91,7 +91,7 @@ cuadro_7_2= Boton_cuadros(mesa[7][2] ,101,346)
 cuadro_7_3= Boton_cuadros(mesa[7][3] ,138,346)
 cuadro_7_4= Boton_cuadros(mesa[7][4] ,173,346)
 #fila8
-cuadro_8_0= Boton_cuadros(mesa[2][0] ,31,384)
+cuadro_8_0= Boton_cuadros(mesa[8][0] ,31,384)
 cuadro_8_1= Boton_cuadros(mesa[8][1] ,66,384)
 cuadro_8_2= Boton_cuadros(mesa[8][2] ,101,384)
 cuadro_8_3= Boton_cuadros(mesa[8][3] ,138,384)
@@ -107,25 +107,6 @@ c = [cuadro_0_0,cuadro_0_1,cuadro_0_2,cuadro_0_3,cuadro_0_4,cuadro_1_0,cuadro_1_
 
 def cambio_mesa(i,j,estado):
     mesa[i][j] = estado
-
-#imagenes de los proyectiles
-bola_de_agua = pygame.image.load("agua.png")
-bola_de_fuego = pygame.image.load("fuego.png")
-bola_de_roca = pygame.image.load("roca.png")
-bola_de_arena = pygame.image.load("arena.png")
-
-class proyectil(pygame.sprite.Sprite):
-    def __init__(self,x,y,imagen):
-        self.imagen = imagen
-        self.rect = self.imagen.get_rect()
-        self.velocidad = -1
-        self.rect.top = y
-        self.rect.left = x
-
-    def direccion(self):
-        self.rect.top = self.rect.top - self.velocidad
-    def disparo(self,ventana):
-        ventana.blit(self.imagen,self.rect)
 
 
 

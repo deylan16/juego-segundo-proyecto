@@ -6,6 +6,7 @@ from threading import Thread
 from rooks import *
 from cursor import *
 from cuadros import *
+from avatares import *
 
 
 def empieza():
@@ -17,6 +18,8 @@ def empieza():
 
     #establece si hay algo seleccionado
     escogido = cuadro_oscuro
+    #reloj
+    reloj = pygame.time.Clock()
     #########################################################################################################################################################################
 
     cuenta_0_0 = 0                 
@@ -59,10 +62,16 @@ def empieza():
     cuenta_7_2 = 0
     cuenta_7_3 = 0
     cuenta_7_4 = 0
+    
     ##########################################################################################################################################################################   
     # el bucle principal del juego
     hola = True
+
+    reloj = pygame.time.Clock()
     while hola:
+        reloj.tick(60)
+        #obtiene el tiepo
+        tiempo = pygame.time.get_ticks()//1000
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
             #cierra el programa
@@ -131,6 +140,8 @@ def empieza():
         #cancelar
         #llama al boton de cancelar
         cancelar.seleccion(ventana,cursor1)
+        #############################################
+        
         #############################################
         #cuadros
         #fila0
@@ -684,6 +695,9 @@ def empieza():
         if mesa[7][4] == cuadro_oscuro:
             cuenta_7_4 = 0
             rook_7_4.cambio(-200,-200,mesa[7][4])
+        ##########################################################
+        avatar_prueba.comportamiento(tiempo)
+        avatar_prueba.aparece(ventana)
         #############################################################
         #proyectiles
         for a in rooks_puestos:
@@ -694,7 +708,14 @@ def empieza():
 
                         if ele.rect.top > 400:
                             a.lista_disparo.remove(ele)
+                        if ele.chocan(avatar_prueba.rect.left,avatar_prueba.rect.top) == True:
+                            avatar_prueba.golpe(7)
+                            a.lista_disparo.remove(ele)
 
+                            
+                            
+        #############################################################
+        
         
         
         #llama al cursor
