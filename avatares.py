@@ -20,7 +20,7 @@ class avatares(pygame.sprite.Sprite):
         self.rect.top = coords[1]
         self.rect.left = coords[0]
         self.vida = vida
-        self.tiempocambio =1
+        self.tiempocambio =2
     def golpe(self,daño):
         self.vida -= daño
         if self.vida <= 0:
@@ -70,8 +70,9 @@ def mueve():
             avatar_prueba.rect.top -= pasos[i]
         else:
             break
-mueve_avatar = Thread(target=mueve, args=())
-mueve_avatar.start()
+def movimiento():
+    mueve_avatar = Thread(target=mueve, args=())
+    mueve_avatar.start()
 
     
 

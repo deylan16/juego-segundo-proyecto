@@ -10,6 +10,7 @@ from avatares import *
 
 def empieza():
     pygame.init()
+    
     # creamos la ventana y le indicamos un titulo:
     ventana = pygame.display.set_mode((267,440))
     pygame.display.set_caption("juego")
@@ -64,11 +65,12 @@ def empieza():
     
     ##########################################################################################################################################################################   
     # el bucle principal del juego
-    hola = True
-
-    while hola:
-        #obtiene el tiepo
-        tiempo = pygame.time.get_ticks()//1000
+    empieza_0 = pygame.time.get_ticks()
+    juego_comienza = True
+    movimiento()
+    while juego_comienza:
+        #obtiene el tiempo        
+        tiempo = abs((empieza_0-pygame.time.get_ticks())//1000)
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
             #cierra el programa
@@ -77,7 +79,7 @@ def empieza():
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                        hola = False
+                        juego_comienza = False
             ##########################################
             #botones de las torres
             if event.type == pygame.MOUSEBUTTONDOWN:
