@@ -721,4 +721,3 @@ def empieza():
         #actualiza la pantalla
         pygame.display.flip()
 
-empieza()
