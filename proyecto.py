@@ -8,7 +8,6 @@ from cursor import *
 from cuadros import *
 from avatares import *
 
-
 def empieza():
     pygame.init()
     # creamos la ventana y le indicamos un titulo:
@@ -19,7 +18,7 @@ def empieza():
     #establece si hay algo seleccionado
     escogido = cuadro_oscuro
     #reloj
-    reloj = pygame.time.Clock()
+
     #########################################################################################################################################################################
 
     cuenta_0_0 = 0                 
@@ -67,9 +66,7 @@ def empieza():
     # el bucle principal del juego
     hola = True
 
-    reloj = pygame.time.Clock()
     while hola:
-        reloj.tick(60)
         #obtiene el tiepo
         tiempo = pygame.time.get_ticks()//1000
         # Posibles entradas del teclado y mouse
@@ -709,9 +706,10 @@ def empieza():
                         if ele.rect.top > 400:
                             a.lista_disparo.remove(ele)
                         if ele.chocan(avatar_prueba.rect.left,avatar_prueba.rect.top) == True:
-                            avatar_prueba.golpe(7)
+                            avatar_prueba.golpe(22)
                             a.lista_disparo.remove(ele)
-
+        if avatar_prueba.rect.top == 104:
+            ventana.blit(perdiste,(0,101))
                             
                             
         #############################################################
