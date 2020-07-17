@@ -91,11 +91,11 @@ cuadro_7_2= Boton_cuadros(mesa[7][2] ,101,346)
 cuadro_7_3= Boton_cuadros(mesa[7][3] ,138,346)
 cuadro_7_4= Boton_cuadros(mesa[7][4] ,173,346)
 #fila8
-cuadro_8_0= Boton_cuadros(mesa[8][0] ,31,384)
-cuadro_8_1= Boton_cuadros(mesa[8][1] ,66,384)
-cuadro_8_2= Boton_cuadros(mesa[8][2] ,101,384)
-cuadro_8_3= Boton_cuadros(mesa[8][3] ,138,384)
-cuadro_8_4= Boton_cuadros(mesa[8][4] ,173,384)
+cuadro_8_0= Boton_cuadros(mesa[8][0] ,31,381)
+cuadro_8_1= Boton_cuadros(mesa[8][1] ,66,381)
+cuadro_8_2= Boton_cuadros(mesa[8][2] ,101,381)
+cuadro_8_3= Boton_cuadros(mesa[8][3] ,138,381)
+cuadro_8_4= Boton_cuadros(mesa[8][4] ,173,381)
 
 
 
