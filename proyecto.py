@@ -14,6 +14,9 @@ def empieza():
     ventana = pygame.display.set_mode((267,440))
     pygame.display.set_caption("juego")
 
+    #Fuente
+    Fuenteti = pygame.font.SysFont("Arial",24)
+
 
     #establece si hay algo seleccionado
     escogido = cuadro_oscuro
@@ -34,9 +37,14 @@ def empieza():
     # el bucle principal del juego
     hola = True
     empieza_0 = pygame.time.get_ticks()
+    contadorI = True
+    aux=1
     while hola:
         #obtiene el tiepo
         tiempo = abs((empieza_0 -pygame.time.get_ticks()))//1000
+        #contador
+        if aux==tiempo and contadorI:
+            aux+=1
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
             #cierra el programa
@@ -987,13 +995,18 @@ def empieza():
         
         for avatar in lista_avatares:            
             if avatar.rect.top == 101:
+                contadorI=False
                 ventana.blit(perdiste,(0,101))
                                             
         #############################################################
-        
+
+        #contador en pantalla
+        contador = Fuenteti.render("Tiempo : "+str(aux),0,(255,255,255))
+        ventana.blit(contador,(145,415))
         
         #llama al cursor
         cursor1.sigue()
+        
         #actualiza la pantalla
         pygame.display.flip()
 
