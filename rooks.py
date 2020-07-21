@@ -2,6 +2,10 @@ import pygame
 from pygame.locals import *
 from cuadros import *
 from cursor import *
+import random
+
+
+
 
 
 ################################################3
@@ -32,6 +36,9 @@ sand_rooks = pygame.image.load("sand rooks.png")
 sand_rooks2 = pygame.image.load("sand rooks2.png")
 water_rooks = pygame.image.load("water rooks.png")
 water_rooks2 = pygame.image.load("water rooks2.png")
+fondo_monedas = pygame.image.load("fondo de monedas.png")
+fondo_monedas2 = pygame.image.load("fondo de monedas2.png")
+fondo_monedas3 = pygame.image.load("fondo de monedas3.png")
 
 
 ##########################################3#######
@@ -43,6 +50,8 @@ boton_rock_rooks= Boton_rooks(rock_rooks,rock_rooks2,80,20)
 boton_sand_rooks= Boton_rooks(sand_rooks,sand_rooks2,140,20)
 #define el boton de la torre de agua
 boton_water_rooks= Boton_rooks(water_rooks,water_rooks2,200,20)
+#recoger monedas 
+boton_recoger_monedas= Boton_rooks(fondo_monedas,fondo_monedas2,215,397)
 #Define el boton cancelar
 cancelar= Boton_rooks(cancelar1,cancelar1_2,20,80)
 
@@ -565,9 +574,28 @@ class proyectil(pygame.sprite.Sprite):
     def get_tipo(self):
         return self.imagen
 
-    def direccion(self):
-        self.rect.top = self.rect.top - self.velocidad
+    def direccion(self,dirije):
+        if dirije == 'abajo':
+            self.rect.top = self.rect.top - self.velocidad
+        else:
+            self.rect.top = self.rect.top + self.velocidad
     def disparo(self,ventana):
         ventana.blit(self.imagen,self.rect)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

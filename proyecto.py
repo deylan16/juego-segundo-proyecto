@@ -6,22 +6,43 @@ from threading import Thread
 from rooks import *
 from cursor import *
 from cuadros import *
+from cuadros import mesa
 from avatares import *
 
-def empieza():
+monedas_para_comprar = 100
+monedas = 0
+muertos = 0
+
+def monedas_aleatorias():
+    global monedas
+    tipos = [25,50,100]
+    sleep(6)
+    monedas += random.choice(tipos)
+    return monedas_aleatorias()
+
+genera = Thread(target= monedas_aleatorias,args = ())
+genera.start()
+
+
+#establece si hay algo seleccionado
+escogido = 'no hace nada'
+
+    
+def empieza(guardado):
     pygame.init()
     # creamos la ventana y le indicamos un titulo:
-    ventana = pygame.display.set_mode((267,440))
+    ventana = pygame.display.set_mode((267,480))
     pygame.display.set_caption("juego")
 
     #Fuente
     Fuenteti = pygame.font.SysFont("Arial",24)
 
+    #bandera para restablecer niveles
+    restablece = 0
 
-    #establece si hay algo seleccionado
-    escogido = cuadro_oscuro
+    
     #reloj
-
+    reloj = pygame.time.Clock()
     #########################################################################################################################################################################
     banderas =[[0,0,0,0,0],
              [0,0,0,0,0],
@@ -33,13 +54,19 @@ def empieza():
              [0,0,0,0,0],
              [0,0,0,0,0]]
     
+
+    
+    
     ##########################################################################################################################################################################   
+    
     # el bucle principal del juego
     hola = True
     empieza_0 = pygame.time.get_ticks()
     contadorI = True
     aux=1
     while hola:
+        reloj.tick(60)
+        global escogido
         #obtiene el tiepo
         tiempo = abs((empieza_0 -pygame.time.get_ticks()))//1000
         #contador
@@ -59,34 +86,48 @@ def empieza():
             ##########################################
             #botones de las torres
             if event.type == pygame.MOUSEBUTTONDOWN:
+                #bon para recoger las monedas
+                if cursor1.colliderect(boton_recoger_monedas):
+                    global monedas
+                    global monedas_para_comprar
+                    monedas_para_comprar += monedas
+                    monedas = 0
                 #evento para seleccionar la torre de fuego
                 if cursor1.colliderect(boton_fire_rooks.rect):
-                    escogido  = cuadro_o_con_fire_rooks
-                    boton_fire_rooks.cambio(fire_rooks2)
-                    boton_water_rooks.cambio(water_rooks)
-                    boton_sand_rooks.cambio(sand_rooks)
-                    boton_rock_rooks.cambio(rock_rooks)
+                    if monedas_para_comprar >= 150 and escogido == 'no hace nada':
+                        monedas_para_comprar -= 150
+                        escogido  = cuadro_o_con_fire_rooks
+                        boton_fire_rooks.cambio(fire_rooks2)
+                        boton_water_rooks.cambio(water_rooks)
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
                 #evento para seleccionar la torre de roca
                 if cursor1.colliderect(boton_rock_rooks.rect):
-                    escogido  = cuadro_o_con_rock_rooks
-                    boton_rock_rooks.cambio(rock_rooks2)
-                    boton_water_rooks.cambio(water_rooks)
-                    boton_sand_rooks.cambio(sand_rooks)
-                    boton_fire_rooks.cambio(fire_rooks)
+                    if monedas_para_comprar >= 100 and escogido == 'no hace nada':
+                        monedas_para_comprar -= 100
+                        escogido  = cuadro_o_con_rock_rooks
+                        boton_rock_rooks.cambio(rock_rooks2)
+                        boton_water_rooks.cambio(water_rooks)
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
                 #evento para seleccionar la torre de arena
                 if cursor1.colliderect(boton_sand_rooks.rect):
-                    escogido  = cuadro_o_con_sand_rooks
-                    boton_sand_rooks.cambio(sand_rooks2)
-                    boton_water_rooks.cambio(water_rooks)
-                    boton_rock_rooks.cambio(rock_rooks)
-                    boton_fire_rooks.cambio(fire_rooks)
+                    if monedas_para_comprar >= 50 and escogido == 'no hace nada':
+                        monedas_para_comprar -= 50
+                        escogido  = cuadro_o_con_sand_rooks
+                        boton_sand_rooks.cambio(sand_rooks2)
+                        boton_water_rooks.cambio(water_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
                 #evento para seleccionar la torre de agua
                 if cursor1.colliderect(boton_water_rooks.rect):
-                    escogido  = cuadro_o_con_water_rooks
-                    boton_water_rooks.cambio(water_rooks2)
-                    boton_sand_rooks.cambio(sand_rooks)
-                    boton_rock_rooks.cambio(rock_rooks)
-                    boton_fire_rooks.cambio(fire_rooks)
+                    if monedas_para_comprar >= 150 and escogido == 'no hace nada':
+                        monedas_para_comprar -= 150
+                        escogido  = cuadro_o_con_water_rooks
+                        boton_water_rooks.cambio(water_rooks2)
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
             #########################################      
             #evento para camcelar la selaccion
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -99,8 +140,39 @@ def empieza():
            
                     
         #imagende fondo
-        fondo = pygame.image.load("mesa.png").convert()
-        ventana.blit(fondo, (0, 0))
+        global muertos
+        fondo = pygame.image.load("mesa.png")
+        fondo2 = pygame.image.load("mesa2.png")
+        fondo3 = pygame.image.load("mesa3.png")
+        if muertos >= 0:
+            ventana.blit(fondo, (0, 0))
+        if muertos >= 10:
+            ventana.blit(fondo2, (0, 0))
+        if muertos >= 20:
+            ventana.blit(fondo3, (0, 0))
+        if muertos == 10 and restablece == 0:
+            mesa[0] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[1] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[2] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[3] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[4] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[5] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[6] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[7] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[8] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            restablece += 1
+        if muertos == 20 and restablece == 1:
+            mesa[0] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[1] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[2] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[3] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[4] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[5] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[6] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[7] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            mesa[8] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
+            restablece += 1
+            
         #############################################33
         #torres
         #llama al boton de la torre de fuego
@@ -178,106 +250,296 @@ def empieza():
     
          #########################################
         #cambia el estado de la matriz principal
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            #fila0
-            if cursor1.colliderect(cuadro_0_0.rect):
-                    cambio_mesa(0,0,escogido)
-            if cursor1.colliderect(cuadro_0_1.rect):
-                    cambio_mesa(0,1,escogido)
-            if cursor1.colliderect(cuadro_0_2.rect):
-                    cambio_mesa(0,2,escogido)
-            if cursor1.colliderect(cuadro_0_3.rect):
-                    cambio_mesa(0,3,escogido)
-            if cursor1.colliderect(cuadro_0_4.rect):
-                    cambio_mesa(0,4,escogido)
-            #fila1
-            if cursor1.colliderect(cuadro_1_0.rect):
-                    cambio_mesa(1,0,escogido)
-            if cursor1.colliderect(cuadro_1_1.rect):
-                    cambio_mesa(1,1,escogido)
-            if cursor1.colliderect(cuadro_1_2.rect):
-                    cambio_mesa(1,2,escogido)
-            if cursor1.colliderect(cuadro_1_3.rect):
-                    cambio_mesa(1,3,escogido)
-            if cursor1.colliderect(cuadro_1_4.rect):
-                    cambio_mesa(1,4,escogido)
-            #fila2
-            if cursor1.colliderect(cuadro_2_0.rect):
-                    cambio_mesa(2,0,escogido)
-            if cursor1.colliderect(cuadro_2_1.rect):
-                    cambio_mesa(2,1,escogido)
-            if cursor1.colliderect(cuadro_2_2.rect):
-                    cambio_mesa(2,2,escogido)
-            if cursor1.colliderect(cuadro_2_3.rect):
-                    cambio_mesa(2,3,escogido)
-            if cursor1.colliderect(cuadro_2_4.rect):
-                    cambio_mesa(2,4,escogido)
-            #fila3
-            if cursor1.colliderect(cuadro_3_0.rect):
-                    cambio_mesa(3,0,escogido)
-            if cursor1.colliderect(cuadro_3_1.rect):
-                    cambio_mesa(3,1,escogido)
-            if cursor1.colliderect(cuadro_3_2.rect):
-                    cambio_mesa(3,2,escogido)
-            if cursor1.colliderect(cuadro_3_3.rect):
-                    cambio_mesa(3,3,escogido)
-            if cursor1.colliderect(cuadro_3_4.rect):
-                    cambio_mesa(3,4,escogido)
-            #fila4
-            if cursor1.colliderect(cuadro_4_0.rect):
-                    cambio_mesa(4,0,escogido)
-            if cursor1.colliderect(cuadro_4_1.rect):
-                    cambio_mesa(4,1,escogido)
-            if cursor1.colliderect(cuadro_4_2.rect):
-                    cambio_mesa(4,2,escogido)
-            if cursor1.colliderect(cuadro_4_3.rect):
-                    cambio_mesa(4,3,escogido)
-            if cursor1.colliderect(cuadro_4_4.rect):
-                    cambio_mesa(4,4,escogido)
-            #fila5
-            if cursor1.colliderect(cuadro_5_0.rect):
-                    cambio_mesa(5,0,escogido)
-            if cursor1.colliderect(cuadro_5_1.rect):
-                    cambio_mesa(5,1,escogido)
-            if cursor1.colliderect(cuadro_5_2.rect):
-                    cambio_mesa(5,2,escogido)
-            if cursor1.colliderect(cuadro_5_3.rect):
-                    cambio_mesa(5,3,escogido)
-            if cursor1.colliderect(cuadro_5_4.rect):
-                    cambio_mesa(5,4,escogido)
-            #fila6
-            if cursor1.colliderect(cuadro_6_0.rect):
-                    cambio_mesa(6,0,escogido)
-            if cursor1.colliderect(cuadro_6_1.rect):
-                    cambio_mesa(6,1,escogido)
-            if cursor1.colliderect(cuadro_6_2.rect):
-                    cambio_mesa(6,2,escogido)
-            if cursor1.colliderect(cuadro_6_3.rect):
-                    cambio_mesa(6,3,escogido)
-            if cursor1.colliderect(cuadro_6_4.rect):
-                    cambio_mesa(6,4,escogido)
-            #fila7
-            if cursor1.colliderect(cuadro_7_0.rect):
-                    cambio_mesa(7,0,escogido)
-            if cursor1.colliderect(cuadro_7_1.rect):
-                    cambio_mesa(7,1,escogido)
-            if cursor1.colliderect(cuadro_7_2.rect):
-                    cambio_mesa(7,2,escogido)
-            if cursor1.colliderect(cuadro_7_3.rect):
-                    cambio_mesa(7,3,escogido)
-            if cursor1.colliderect(cuadro_7_4.rect):
-                    cambio_mesa(7,4,escogido)
-            #fila8
-            if cursor1.colliderect(cuadro_8_0.rect):
-                    cambio_mesa(8,0,escogido)
-            if cursor1.colliderect(cuadro_8_1.rect):
-                    cambio_mesa(8,1,escogido)
-            if cursor1.colliderect(cuadro_8_2.rect):
-                    cambio_mesa(8,2,escogido)
-            if cursor1.colliderect(cuadro_8_3.rect):
-                    cambio_mesa(8,3,escogido)
-            if cursor1.colliderect(cuadro_8_4.rect):
-                    cambio_mesa(8,4,escogido)
+        if escogido != 'no hace nada':
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                #fila0
+                if cursor1.colliderect(cuadro_0_0.rect):
+                        cambio_mesa(0,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_0_1.rect):
+                        cambio_mesa(0,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_0_2.rect):
+                        cambio_mesa(0,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_0_3.rect):
+                        cambio_mesa(0,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_0_4.rect):
+                        cambio_mesa(0,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila1
+                if cursor1.colliderect(cuadro_1_0.rect):
+                        cambio_mesa(1,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_1_1.rect):
+                        cambio_mesa(1,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_1_2.rect):
+                        cambio_mesa(1,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_1_3.rect):
+                        cambio_mesa(1,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_1_4.rect):
+                        cambio_mesa(1,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila2
+                if cursor1.colliderect(cuadro_2_0.rect):
+                        cambio_mesa(2,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_2_1.rect):
+                        cambio_mesa(2,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_2_2.rect):
+                        cambio_mesa(2,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_2_3.rect):
+                        cambio_mesa(2,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_2_4.rect):
+                        cambio_mesa(2,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila3
+                if cursor1.colliderect(cuadro_3_0.rect):
+                        cambio_mesa(3,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_3_1.rect):
+                        cambio_mesa(3,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_3_2.rect):
+                        cambio_mesa(3,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_3_3.rect):
+                        cambio_mesa(3,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_3_4.rect):
+                        cambio_mesa(3,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila4
+                if cursor1.colliderect(cuadro_4_0.rect):
+                        cambio_mesa(4,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_4_1.rect):
+                        cambio_mesa(4,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_4_2.rect):
+                        cambio_mesa(4,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_4_3.rect):
+                        cambio_mesa(4,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_4_4.rect):
+                        cambio_mesa(4,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila5
+                if cursor1.colliderect(cuadro_5_0.rect):
+                        cambio_mesa(5,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_5_1.rect):
+                        cambio_mesa(5,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_5_2.rect):
+                        cambio_mesa(5,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_5_3.rect):
+                        cambio_mesa(5,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_5_4.rect):
+                        cambio_mesa(5,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila6
+                if cursor1.colliderect(cuadro_6_0.rect):
+                        cambio_mesa(6,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_6_1.rect):
+                        cambio_mesa(6,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_6_2.rect):
+                        cambio_mesa(6,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_6_3.rect):
+                        cambio_mesa(6,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_6_4.rect):
+                        cambio_mesa(6,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                #fila7
+                if cursor1.colliderect(cuadro_7_0.rect):
+                        cambio_mesa(7,0,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_7_1.rect):
+                        cambio_mesa(7,1,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_7_2.rect):
+                        cambio_mesa(7,2,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_7_3.rect):
+                        cambio_mesa(7,3,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(cuadro_7_4.rect):
+                        cambio_mesa(7,4,escogido)
+                        escogido = 'no hace nada'
+                        boton_sand_rooks.cambio(sand_rooks)
+                        boton_fire_rooks.cambio(fire_rooks)
+                        boton_rock_rooks.cambio(rock_rooks)
+                        boton_water_rooks.cambio(water_rooks)
 
 
         #fila2
@@ -333,7 +595,7 @@ def empieza():
         ########################################
         #fila0
         #rook_0_0    
-        if mesa[0][0] != cuadro_oscuro and banderas[0][0] == 0:
+        if mesa[0][0] != cuadro_oscuro and banderas[0][0] == 0:            
             pone_rooks_0_0()
             banderas[0][0] = 1
             if mesa[0][0] == cuadro_o_con_sand_rooks:
@@ -909,7 +1171,7 @@ def empieza():
             pone_rooks_7_2()
             banderas[7][2] = 1
             if mesa[7][2] == cuadro_o_con_sand_rooks:
-                rook_7_2.cambio(cuadro_7_2.coordsx_get(),cuadro_7_2.coordsy_get(),mesa[7][2],1000)
+                rook_7_2.cambio(cuadro_7_2.coordsx_get(),cuadro_7_2.coordsy_get(),mesa[7][2],7)
             if mesa[7][2] == cuadro_o_con_water_rooks:
                 rook_7_2.cambio(cuadro_7_2.coordsx_get(),cuadro_7_2.coordsy_get(),mesa[7][2],16)
             if mesa[7][2] == cuadro_o_con_fire_rooks:
@@ -951,58 +1213,108 @@ def empieza():
             banderas[7][4] = 0
             rook_7_4.cambio(-200,-200,mesa[7][4],0)
         ##########################################################
-        hello = localtime()
-        if len(poner_avatares) > 0:
-            for ele in poner_avatares:
-                ele.comportamiento(tiempo)
-                ele.aparece(ventana)
-                ele.camina(hello[5])
-
+        segundos = localtime()
+        if contadorI == True:
+            if len(poner_avatares) > 0:
+                for ele in poner_avatares:
+                    ele.comportamiento(segundos[5])
+                    ele.aparece(ventana)
+                    ele.camina(segundos[5])
         #############################################################
         #proyectiles
-        for a in rooks_puestos:
-            if len(a.lista_disparo)>0:
-                for ele in a.lista_disparo:
-                        ele.direccion() 
-                        ele.disparo(ventana)
+        if contadorI == True:
+            for a in rooks_puestos:
+                #if len(a.lista_disparo)>0:
+                 #   if a.y == coord_x:
+                       # print('bien')
+                        for ele in a.lista_disparo:
+                            ele.direccion('abajo') 
+                            ele.disparo(ventana)
 
-                        if ele.rect.top > 400:
-                            a.lista_disparo.remove(ele)
-                        for i in  lista_avatares:
-                            if ele.chocan(i.rect.left,i.rect.top) == True:
-                                if ele.get_tipo() == bola_de_agua:
-                                    i.golpe(8)
-                                if ele.get_tipo() == bola_de_arena:
-                                    i.golpe(0)
-                                if ele.get_tipo() == bola_de_fuego:
-                                    i.golpe(8)
-                                if ele.get_tipo() == bola_de_roca:
-                                    i.golpe(4)
+                            if ele.rect.top > 400:
                                 a.lista_disparo.remove(ele)
+                            for i in  lista_avatares:
+                                if ele.chocan(i.rect.left,i.rect.top) == True:
+                                    if ele.get_tipo() == bola_de_agua:
+                                        monedas_para_comprar +=int(i.golpe(8))
+                                    if ele.get_tipo() == bola_de_arena:
+                                        monedas_para_comprar +=int(i.golpe(2))
+                                    if ele.get_tipo() == bola_de_fuego:
+                                        monedas_para_comprar +=int(i.golpe(8))
+                                    if ele.get_tipo() == bola_de_roca:
+                                        monedas_para_comprar +=int(i.golpe(4))
+                                    if ele in a.lista_disparo:
+                                        a.lista_disparo.remove(ele)
+                    #else:
+                        #print('mal')
+                        #a.lista_disparo = []
+        if contadorI == True:
+            for a in lista_avatares:
+                if a.get_tipo() == arquero1:
+                    if len(a.lista_disparo)>0:
+                        for ele in a.lista_disparo:
+                                ele.direccion('arriba') 
+                                ele.disparo(ventana)
 
+                                if ele.rect.top < 100:
+                                    a.lista_disparo.remove(ele)
+                                for i in  rooks_puestos:
+                                    if ele.chocan(i.x,i.y) == True:
+                                        i.golpe(2)
+                                        a.lista_disparo.remove(ele)
+
+        if contadorI == True:
+            for a in lista_avatares:
+                if a.get_tipo() != arquero1:
+                    if len(a.lista_disparo)>0:
+                        for ele in a.lista_disparo:
+                                ele.direccion('arriba') 
+                                ele.disparo(ventana)
+
+                                if ele.rect.top < 100:
+                                    a.lista_disparo.remove(ele)
+                                for i in  rooks_puestos:
+                                    if ele.chocan(i.x,i.y) == True:
+                                        if ele.get_tipo() == espada:
+                                            i.golpe(3)
+                                        if ele.get_tipo() == hacha:
+                                            i.golpe(9)
+                                        if ele.get_tipo() == garrote:
+                                            i.golpe(12)
+                                        a.lista_disparo.remove(ele)
+                                    
         for avatar in lista_avatares:
             for rooks in rooks_puestos:
                 if avatar.coords() == rooks.coords():
-                    if avatar.get_tipo() == leñador1:
-                        rooks.golpe(9)                       
-                    if avatar.get_tipo() == arquero1:
-                        rooks.golpe(2)
-                    if avatar.get_tipo() == canibal1:
-                        rooks.golpe(12)
-                    if avatar.get_tipo() == escudero1:
-                        rooks.golpe(3)
+                    avatar.dañar = True
+
                     
-        
         for avatar in lista_avatares:            
             if avatar.rect.top == 101:
                 contadorI=False
-                ventana.blit(perdiste,(0,101))
-                                            
+                ventana.blit(perdiste,(0,101))                                   
         #############################################################
-
+        #fondo de la monedas para comprar
+        ventana.blit(fondo_monedas3,(215,97))
+        #boton para recoger monedas
+        boton_recoger_monedas.seleccion(ventana,cursor1)
+        #monedas para comprar
+        monedas_para_comprar_ = Fuenteti.render(str(monedas_para_comprar),0,(255,255,255))
+        ventana.blit(monedas_para_comprar_,(220,100))
+        #monedas para recolectar
+        monedas_para_retirar = Fuenteti.render(str(monedas),0,(255,255,255))
+        ventana.blit(monedas_para_retirar,(220,400))
         #contador en pantalla
         contador = Fuenteti.render("Tiempo : "+str(aux),0,(255,255,255))
-        ventana.blit(contador,(145,415))
+        ventana.blit(contador,(0,415))
+
+        for avatar in lista_avatares:
+            if avatar.vida <= 0:
+                muertos += 1
+                lista_avatares.remove(avatar)
+                
+        
+
         
         #llama al cursor
         cursor1.sigue()
@@ -1010,5 +1322,6 @@ def empieza():
         #actualiza la pantalla
         pygame.display.flip()
 
+        
 
-empieza()
+empieza('ninguno')
