@@ -120,6 +120,9 @@ cuadro_8_4= Boton_cuadros(cuadro_oscuro ,173,381)
 def cambio_mesa(i,j,estado):
             mesa[i][j] = estado
 
+volumenS = pygame.image.load('volumenS.png')
+volumenN = pygame.image.load('volumenN.png')
+volumen= Boton_cuadros(volumenS ,0,0)
 
 
 

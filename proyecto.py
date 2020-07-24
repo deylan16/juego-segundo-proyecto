@@ -12,6 +12,7 @@ from avatares import *
 monedas_para_comprar = 100
 monedas = 0
 muertos = 0
+activo = True
 
 def monedas_aleatorias():
     global monedas
@@ -53,7 +54,9 @@ def empieza(guardado):
              [0,0,0,0,0],
              [0,0,0,0,0],
              [0,0,0,0,0]]
-    
+
+    #musica
+    pygame.mixer.music.load('musica.mp3')
 
     
     
@@ -64,7 +67,9 @@ def empieza(guardado):
     empieza_0 = pygame.time.get_ticks()
     contadorI = True
     aux=1
+    pygame.mixer.music.play(4)
     while hola:
+        
         reloj.tick(60)
         global escogido
         #obtiene el tiepo
@@ -80,9 +85,9 @@ def empieza(guardado):
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                        hola = False
-                if event.key == K_p:
-                        hola = True
+                        pygame.display.quit()
+                        pygame.quit()
+                        sys.exit()
             ##########################################
             #botones de las torres
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -137,6 +142,15 @@ def empieza(guardado):
                     boton_fire_rooks.cambio(fire_rooks)
                     boton_rock_rooks.cambio(rock_rooks)
                     boton_water_rooks.cambio(water_rooks)
+                if cursor1.colliderect(volumen.rect):
+                    if volumen.imagen_actual == volumenS:
+                        volumen.imagen_actual = volumenN
+                        pygame.mixer.music.stop()
+                        
+                    elif volumen.imagen_actual == volumenN:
+                        volumen.imagen_actual = volumenS
+                        pygame.mixer.music.play(4)
+            
            
                     
         #imagende fondo
@@ -146,11 +160,12 @@ def empieza(guardado):
         fondo3 = pygame.image.load("mesa3.png")
         if muertos >= 0:
             ventana.blit(fondo, (0, 0))
-        if muertos >= 10:
+        if muertos >= 5:
             ventana.blit(fondo2, (0, 0))
-        if muertos >= 20:
+        if muertos >= 10:
             ventana.blit(fondo3, (0, 0))
-        if muertos == 10 and restablece == 0:
+
+        if muertos == 5 and restablece == 0:
             mesa[0] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             mesa[1] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             mesa[2] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
@@ -161,7 +176,7 @@ def empieza(guardado):
             mesa[7] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             mesa[8] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             restablece += 1
-        if muertos == 20 and restablece == 1:
+        if muertos == 10 and restablece == 1:
             mesa[0] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             mesa[1] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
             mesa[2] = [cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro]
@@ -1213,6 +1228,10 @@ def empieza(guardado):
             banderas[7][4] = 0
             rook_7_4.cambio(-200,-200,mesa[7][4],0)
         ##########################################################
+        global activo
+        if activo == True:
+            aparecen_avatares()
+            activo = False
         segundos = localtime()
         if contadorI == True:
             if len(poner_avatares) > 0:
@@ -1314,7 +1333,7 @@ def empieza(guardado):
                 lista_avatares.remove(avatar)
                 
         
-
+        volumen.seleccion(ventana,cursor1)
         
         #llama al cursor
         cursor1.sigue()
@@ -1324,4 +1343,4 @@ def empieza(guardado):
 
         
 
-empieza('ninguno')
+

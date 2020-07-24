@@ -95,7 +95,7 @@ def menu_inicio():
 
 #Definicion de la ventana del juego
 def juego():
-    empieza()
+    empieza('ninguno')
 
 #Definicion de la ventana de configuracion 
 def config():

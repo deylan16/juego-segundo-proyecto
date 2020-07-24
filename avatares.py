@@ -105,12 +105,12 @@ poner_avatares = []
 
 segundos_entre_cada_avatar = 7
 def crea_avatar():
-    for numero in range(0,30):
-        if numero <= 11:
+    for numero in range(0,15):
+        if numero <= 6:
             sleep(segundos_entre_cada_avatar)
-        if numero > 11 and numero<= 21:
+        if numero > 6 and numero<= 11:
             sleep((segundos_entre_cada_avatar//10)*7)
-        if numero > 21:
+        if numero > 11:
             sleep((segundos_entre_cada_avatar//10)*4)
         coordenadas = [(31,381),(66,381),(101,381),(138,381),(173,381)]
         for ocupado in lista_avatares:
@@ -131,8 +131,9 @@ def crea_avatar():
             poner_avatares.append(avatar_prueba)
     
     
-crea = Thread(target=crea_avatar,args=())
-crea.start()
+def aparecen_avatares():
+    crea = Thread(target=crea_avatar,args=())
+    crea.start()
 
 
 def coord_x():
