@@ -1342,5 +1342,3 @@ def empieza(guardado):
         pygame.display.flip()
 
         
-
-
