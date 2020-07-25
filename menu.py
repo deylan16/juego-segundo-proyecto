@@ -24,9 +24,24 @@ click = False
 
 #Definicio de la ventana incial
 def menu_inicio():
+    user_text = 'Tu Nombre!'
+
+    input_rect = pygame.Rect(150, 0,185,25)
+    color_activo = pygame.Color('lightskyblue3')
+    color_pasivo = pygame.Color('gray15')
+    color = color_pasivo
+
+    activo = False
+    
     while True:
 
         ventana.fill((0,170,228))
+
+        if activo:
+            color = color_activo
+        else:
+            color = color_pasivo
+        
         escribir('Battle:', fuente,(255,0,0),ventana,20,20)
         escribir('Avatars', fuente2,(255,255,0),ventana,20,50)
         escribir('vs', fuente2,(10,10,10),ventana,130,50)
@@ -88,9 +103,27 @@ def menu_inicio():
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+                if activo:
+                    if event.key == pygame.K_BACKSPACE:
+                        user_text = user_text[:-1]
+                    else:
+                        user_text += event.unicode
             if event.type ==  MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
+                if input_rect.collidepoint(event.pos):
+                    activo = True
+                else:
+                    activo = False
+
+        pygame.draw.rect(ventana,color,input_rect,2)
+
+    
+        text_surface = fuente3.render(user_text,True,(10,10,10))
+        ventana.blit(text_surface,(input_rect.x + 5, input_rect.y + 5))
+
+        input_rect.w = max(100,text_surface.get_width() + 10)
+        
 
         pygame.display.update()
         mainClock.tick(60)
@@ -103,9 +136,9 @@ def juego():
 def config():
     running = True
     while running:
-        ventana.fill((0,0,0))
+        ventana.fill((0,170,228))
         
-        escribir('configuracion', fuente,(255,0,0),ventana,20,20)
+        escribir('configuracion', fuente,(128,64,0),ventana,20,20)
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -122,7 +155,7 @@ def config():
 def famehall():
     running = True
     while running:
-        ventana.fill((0,0,0))
+        ventana.fill((0,170,228))
         
         escribir('Salon', fuente,(255,0,0),ventana,20,20)
         for event in pygame.event.get():
