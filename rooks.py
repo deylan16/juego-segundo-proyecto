@@ -3,7 +3,7 @@ from pygame.locals import *
 from cuadros import *
 from cursor import *
 import random
-
+import shelve
 
 
 
@@ -96,6 +96,9 @@ class rooks(pygame.sprite.Sprite):
         pantalla.blit(self.imagen_actual,(self.x,self.y))
 
 ##################################
+d = shelve.open('configuraciones')
+VAR = d['VAR']
+d.close()
 #funciones y creacion del rook_0_0
 rook_0_0= rooks(cuadro_oscuro,-200,-200,0)
 def pone_rooks_0_0():  
@@ -105,7 +108,7 @@ def pone_rooks_0_0():
 def imprimir_0_0():
     if mesa[0][0] != cuadro_oscuro:
         rooks_puestos[0].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_0_0()
 #funciones y creacion del rook_0_1
 rook_0_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -116,7 +119,7 @@ def pone_rooks_0_1():
 def imprimir_0_1():
     if mesa[0][1] != cuadro_oscuro:
         rooks_puestos[1].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_0_1()
 #funciones y creacion del rook_0_2
 rook_0_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -127,7 +130,7 @@ def pone_rooks_0_2():
 def imprimir_0_2():
     if mesa[0][2] != cuadro_oscuro:
         rooks_puestos[2].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_0_2()
 #funciones y creacion del rook_0_3
 rook_0_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -138,7 +141,7 @@ def pone_rooks_0_3():
 def imprimir_0_3():
     if mesa[0][3] != cuadro_oscuro:
         rooks_puestos[3].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_0_3()
 #funciones y creacion del rook_0_4
 rook_0_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -149,7 +152,7 @@ def pone_rooks_0_4():
 def imprimir_0_4():
     if mesa[0][4] != cuadro_oscuro:
         rooks_puestos[4].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_0_4()
 ################################################
 #funciones y creacion del rook_1_0
@@ -161,7 +164,7 @@ def pone_rooks_1_0():
 def imprimir_1_0():
     if mesa[1][0] != cuadro_oscuro:
         rooks_puestos[5].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_1_0()
 #funciones y creacion del rook_1_1
 rook_1_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -172,7 +175,7 @@ def pone_rooks_1_1():
 def imprimir_1_1():
     if mesa[1][1] != cuadro_oscuro:
         rooks_puestos[6].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_1_1()
 #funciones y creacion del rook_1_2
 rook_1_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -183,7 +186,7 @@ def pone_rooks_1_2():
 def imprimir_1_2():
     if mesa[1][2] != cuadro_oscuro:
         rooks_puestos[7].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_1_2()
 #funciones y creacion del rook_1_3
 rook_1_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -194,7 +197,7 @@ def pone_rooks_1_3():
 def imprimir_1_3():
     if mesa[1][3] != cuadro_oscuro:
         rooks_puestos[8].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_1_3()
 #funciones y creacion del rook_1_4
 rook_1_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -205,7 +208,7 @@ def pone_rooks_1_4():
 def imprimir_1_4():
     if mesa[1][4] != cuadro_oscuro:
         rooks_puestos[9].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_1_4()
 ##################################
 #funciones y creacion del rook_2_0
@@ -217,7 +220,7 @@ def pone_rooks_2_0():
 def imprimir_2_0():
     if mesa[2][0] != cuadro_oscuro:
         rooks_puestos[10].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_2_0()
 #funciones y creacion del rook_2_1
 rook_2_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -228,7 +231,7 @@ def pone_rooks_2_1():
 def imprimir_2_1():
     if mesa[2][1] != cuadro_oscuro:
         rooks_puestos[11].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_2_1()
 #funciones y creacion del rook_2_2
 rook_2_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -239,7 +242,7 @@ def pone_rooks_2_2():
 def imprimir_2_2():
     if mesa[2][2] != cuadro_oscuro:
         rooks_puestos[12].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_2_2()
 #funciones y creacion del rook_2_3
 rook_2_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -250,7 +253,7 @@ def pone_rooks_2_3():
 def imprimir_2_3():
     if mesa[2][3] != cuadro_oscuro:
         rooks_puestos[13].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_2_3()
 #funciones y creacion del rook_2_4
 rook_2_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -261,7 +264,7 @@ def pone_rooks_2_4():
 def imprimir_2_4():
     if mesa[2][4] != cuadro_oscuro:
         rooks_puestos[14].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_2_4()
 ################################################
 #funciones y creacion del rook_3_0
@@ -273,7 +276,7 @@ def pone_rooks_3_0():
 def imprimir_3_0():
     if mesa[3][0] != cuadro_oscuro:
         rooks_puestos[15].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_3_0()
 #funciones y creacion del rook_3_1
 rook_3_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -284,7 +287,7 @@ def pone_rooks_3_1():
 def imprimir_3_1():
     if mesa[3][1] != cuadro_oscuro:
         rooks_puestos[16].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_3_1()
 #funciones y creacion del rook_3_2
 rook_3_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -295,7 +298,7 @@ def pone_rooks_3_2():
 def imprimir_3_2():
     if mesa[3][2] != cuadro_oscuro:
         rooks_puestos[17].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_3_2()
 #funciones y creacion del rook_3_3
 rook_3_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -306,7 +309,7 @@ def pone_rooks_3_3():
 def imprimir_3_3():
     if mesa[3][3] != cuadro_oscuro:
         rooks_puestos[18].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_3_3()
 #funciones y creacion del rook_3_4
 rook_3_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -317,7 +320,7 @@ def pone_rooks_3_4():
 def imprimir_3_4():
     if mesa[3][4] != cuadro_oscuro:
         rooks_puestos[19].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_3_4()
 ##################################
 #funciones y creacion del rook_4_0
@@ -329,7 +332,7 @@ def pone_rooks_4_0():
 def imprimir_4_0():
     if mesa[4][0] != cuadro_oscuro:
         rooks_puestos[20].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_4_0()
 #funciones y creacion del rook_4_1
 rook_4_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -340,7 +343,7 @@ def pone_rooks_4_1():
 def imprimir_4_1():
     if mesa[4][1] != cuadro_oscuro:
         rooks_puestos[21].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_4_1()
 #funciones y creacion del rook_4_2
 rook_4_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -351,7 +354,7 @@ def pone_rooks_4_2():
 def imprimir_4_2():
     if mesa[4][2] != cuadro_oscuro:
         rooks_puestos[22].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_4_2()
 #funciones y creacion del rook_4_3
 rook_4_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -362,7 +365,7 @@ def pone_rooks_4_3():
 def imprimir_4_3():
     if mesa[4][3] != cuadro_oscuro:
         rooks_puestos[23].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_4_3()
 #funciones y creacion del rook_4_4
 rook_4_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -373,7 +376,7 @@ def pone_rooks_4_4():
 def imprimir_4_4():
     if mesa[4][4] != cuadro_oscuro:
         rooks_puestos[24].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_4_4()
 ################################################
 #funciones y creacion del rook_5_0
@@ -385,7 +388,7 @@ def pone_rooks_5_0():
 def imprimir_5_0():
     if mesa[5][0] != cuadro_oscuro:
         rooks_puestos[25].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_5_0()
 #funciones y creacion del rook_5_1
 rook_5_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -396,7 +399,7 @@ def pone_rooks_5_1():
 def imprimir_5_1():
     if mesa[5][1] != cuadro_oscuro:
         rooks_puestos[26].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_5_1()
 #funciones y creacion del rook_5_2
 rook_5_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -407,7 +410,7 @@ def pone_rooks_5_2():
 def imprimir_5_2():
     if mesa[5][2] != cuadro_oscuro:
         rooks_puestos[27].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_5_2()
 #funciones y creacion del rook_5_3
 rook_5_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -418,7 +421,7 @@ def pone_rooks_5_3():
 def imprimir_5_3():
     if mesa[5][3] != cuadro_oscuro:
         rooks_puestos[28].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_5_3()
 #funciones y creacion del rook_5_4
 rook_5_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -429,7 +432,7 @@ def pone_rooks_5_4():
 def imprimir_5_4():
     if mesa[5][4] != cuadro_oscuro:
         rooks_puestos[29].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_5_4()
 ###################################
 #funciones y creacion del rook_6_0
@@ -441,7 +444,7 @@ def pone_rooks_6_0():
 def imprimir_6_0():
     if mesa[6][0] != cuadro_oscuro:
         rooks_puestos[30].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_6_0()
 #funciones y creacion del rook_6_1
 rook_6_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -452,7 +455,7 @@ def pone_rooks_6_1():
 def imprimir_6_1():
     if mesa[6][1] != cuadro_oscuro:
         rooks_puestos[31].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_6_1()
 #funciones y creacion del rook_6_2
 rook_6_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -463,7 +466,7 @@ def pone_rooks_6_2():
 def imprimir_6_2():
     if mesa[6][2] != cuadro_oscuro:
         rooks_puestos[32].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_6_2()
 #funciones y creacion del rook_6_3
 rook_6_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -474,7 +477,7 @@ def pone_rooks_6_3():
 def imprimir_6_3():
     if mesa[6][3] != cuadro_oscuro:
         rooks_puestos[33].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_6_3()
 #funciones y creacion del rook_6_4
 rook_6_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -485,7 +488,7 @@ def pone_rooks_6_4():
 def imprimir_6_4():
     if mesa[6][4] != cuadro_oscuro:
         rooks_puestos[34].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_6_4()
 ################################################
 #funciones y creacion del rook_7_0
@@ -497,7 +500,7 @@ def pone_rooks_7_0():
 def imprimir_7_0():
     if mesa[7][0] != cuadro_oscuro:
         rooks_puestos[35].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_7_0()
 #funciones y creacion del rook_7_1
 rook_7_1= rooks(cuadro_oscuro,-200,-200,0)
@@ -508,7 +511,7 @@ def pone_rooks_7_1():
 def imprimir_7_1():
     if mesa[7][1] != cuadro_oscuro:
         rooks_puestos[36].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_7_1()
 #funciones y creacion del rook_7_2
 rook_7_2= rooks(cuadro_oscuro,-200,-200,0)
@@ -519,7 +522,7 @@ def pone_rooks_7_2():
 def imprimir_7_2():
     if mesa[7][2] != cuadro_oscuro:
         rooks_puestos[37].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_7_2()
 #funciones y creacion del rook_7_3
 rook_7_3= rooks(cuadro_oscuro,-200,-200,0)
@@ -530,7 +533,7 @@ def pone_rooks_7_3():
 def imprimir_7_3():
     if mesa[7][3] != cuadro_oscuro:
         rooks_puestos[38].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_7_3()
 #funciones y creacion del rook_7_4
 rook_7_4= rooks(cuadro_oscuro,-200,-200,0)
@@ -541,7 +544,7 @@ def pone_rooks_7_4():
 def imprimir_7_4():
     if mesa[7][4] != cuadro_oscuro:
         rooks_puestos[39].disparos()
-        sleep(1)
+        sleep(VAR)
         imprimir_7_4()
 
 

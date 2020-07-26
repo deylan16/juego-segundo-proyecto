@@ -33,7 +33,7 @@ def empieza(guardado):
     pygame.init()
     # creamos la ventana y le indicamos un titulo:
     ventana = pygame.display.set_mode((267,480))
-    pygame.display.set_caption("juego")
+    pygame.display.set_caption("Battle: Avatars vs Rooks")
 
     #Fuente
     Fuenteti = pygame.font.SysFont("Arial",24)

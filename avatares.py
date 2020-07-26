@@ -1,3 +1,4 @@
+import shelve
 import pygame
 from pygame.locals import *
 import random
@@ -15,6 +16,7 @@ perdiste= pygame.image.load("perdiste.png")
 
 class avatares(pygame.sprite.Sprite):
     def __init__(self,coords,datos,segundos):
+        self.velat = datos[5]
         self.imagen = datos[0]
         self.imagen2 = datos[1]
         self.listaimagenes = [self.imagen,self.imagen2]
@@ -64,7 +66,7 @@ class avatares(pygame.sprite.Sprite):
                 if self.imagen == escudero1:
                     bala = proyectil(self.rect.left,self.rect.top-33,espada)
                     self.lista_disparo.append(bala)
-            self.segundosa += 1
+            self.segundosa += self.velat
             if self.posimagen > len(self.listaimagenes)-1:
                 self.posimagen = 0
         if self. segundosa == 60:
@@ -81,16 +83,32 @@ class avatares(pygame.sprite.Sprite):
 #definicion avatares
 leñador1= pygame.image.load("leñador1.png")
 leñador2= pygame.image.load("leñador2.png")
-leñador = [leñador1,leñador2,20,3,False]
+d = shelve.open('configuraciones')
+VAC = d['VAC']
+VMC = d['VMC']
+d.close()
+leñador = [leñador1,leñador2,20,VMC,False,VAC]
 canibal1= pygame.image.load("canibal1.png")
 canibal2= pygame.image.load("canibal2.png")
-canibal= [canibal1,canibal2,25,4,False]
+d = shelve.open('configuraciones')
+VAL = d['VAL']
+VML = d['VML']
+d.close()
+canibal= [canibal1,canibal2,25,VML,False,VAL]
 escudero1= pygame.image.load("escudero1.png")
 escudero2= pygame.image.load("escudero2.png")
-escudero= [escudero1,escudero2,10,5,False]
+d = shelve.open('configuraciones')
+VAE = d['VAE']
+VME = d['VME']
+d.close()
+escudero= [escudero1,escudero2,10,VME,False,VAE]
 arquero1= pygame.image.load("arquero1.png")
 arquero2= pygame.image.load("arquero2.png")
-arquero= [arquero1,arquero2,5,6,False]
+d = shelve.open('configuraciones')
+VAF = d['VAF']
+VMF = d['VMF']
+d.close()
+arquero= [arquero1,arquero2,5,VMF,False,VAF]
 
 tipo_avatar = [canibal,leñador,arquero,escudero]
 

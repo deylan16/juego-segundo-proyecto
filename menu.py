@@ -1,3 +1,4 @@
+import shelve
 import pygame,sys 
 from proyecto import *
 #ventana de pygame
@@ -33,7 +34,8 @@ def menu_inicio():
 
     activo = False
     
-    while True:
+    running = True
+    while running:
 
         ventana.fill((0,170,228))
 
@@ -134,18 +136,256 @@ def juego():
 
 #Definicion de la ventana de configuracion 
 def config():
+    #se obtienen datos de la biblioteca
+    d = shelve.open('configuraciones')
+    atkspf = str(d['VAF'])
+    mvspf = str(d['VMF'])
+    atkspe = str(d['VAE'])
+    mvspe = str(d['VME'])
+    atkspl = str(d['VAL'])
+    mvspl = str(d['VML'])
+    atkspc = str(d['VAC'])
+    mvspc = str(d['VMC'])
+    atkspr = str(d['VAR'])
+    d.close()
+    
+    
+
+    input_rect = pygame.Rect(5, 110,185,25)
+    input_rect1 = pygame.Rect(150, 110,185,25)
+    input_rect2 = pygame.Rect(5, 160,185,25)
+    input_rect3 = pygame.Rect(150, 160,185,25)
+    input_rect4 = pygame.Rect(5, 210,185,25)
+    input_rect5 = pygame.Rect(150, 210,185,25)
+    input_rect6 = pygame.Rect(5, 260,185,25)
+    input_rect7 = pygame.Rect(150, 260,185,25)
+    input_rect8 = pygame.Rect(75, 320,185,25)
+    color_activo = pygame.Color('lightskyblue3')
+    color_pasivo = pygame.Color('gray15')
+    color = color_pasivo
+
+    activo = False
+    activo1 = False
+    activo2 = False
+    activo3 = False
+    activo4 = False
+    activo5 = False
+    activo6 = False
+    activo7 = False
+    activo8 = False
+    
     running = True
     while running:
         ventana.fill((0,170,228))
+
+        if activo:
+            color = color_activo
+        else:
+            color = color_pasivo
+        if activo1:
+            color1 = color_activo
+        else:
+            color1 = color_pasivo
+        if activo2:
+            color2 = color_activo
+        else:
+            color2 = color_pasivo
+        if activo3:
+            color3 = color_activo
+        else:
+            color3 = color_pasivo
+        if activo4:
+            color4 = color_activo
+        else:
+            color4 = color_pasivo
+        if activo5:
+            color5 = color_activo
+        else:
+            color5 = color_pasivo
+        if activo6:
+            color6 = color_activo
+        else:
+            color6 = color_pasivo
+        if activo7:
+            color7 = color_activo
+        else:
+            color7 = color_pasivo
+        if activo8:
+            color8 = color_activo
+        else:
+            color8 = color_pasivo
         
-        escribir('configuracion', fuente,(128,64,0),ventana,20,20)
+        escribir('Configuración', fuente,(128,64,0),ventana,10,10)
+        escribir('VA = Velocidad de Ataque', fuente4,(10,10,10),ventana,0,50)
+        escribir('VM = Velocidad de Movimiento', fuente4,(10,10,10),ventana,0,65)
+        escribir('----------------------------------------------------------------------------------------------------------------------', fuente4,(10,10,10),ventana,0,80)
+        escribir('VA del flechador', fuente4,(10,10,10),ventana,0,95)
+        escribir('VM del flechador', fuente4,(10,10,10),ventana,145,95)
+        escribir('VA del escudero', fuente4,(10,10,10),ventana,0,145)
+        escribir('VM del escudero', fuente4,(10,10,10),ventana,145,145)
+        escribir('VA del leñador', fuente4,(10,10,10),ventana,0,195)
+        escribir('VM del leñador', fuente4,(10,10,10),ventana,145,195)
+        escribir('VA del canibal', fuente4,(10,10,10),ventana,0,245)
+        escribir('VM del canibal', fuente4,(10,10,10),ventana,145,245)
+        escribir('VA de los rooks', fuente5,(10,10,10),ventana,65,300)
+        textoat3 = fuente4.render("Atrás",0,(10,10,10))
+
+        mx,my = pygame.mouse.get_pos()
+
+        botonat3 = pygame.Rect(20, 400, 60, 30)
+        if botonat3.collidepoint((mx,my)):
+            if click:
+                d = shelve.open('configuraciones')
+                d['VAF'] = int(atkspf)
+                d['VMF'] = int(mvspf)
+                d['VAE'] = int(atkspe)
+                d['VME'] = int(mvspe)
+                d['VAL'] = int(atkspl)
+                d['VML'] = int(mvspl)
+                d['VAC'] = int(atkspc)
+                d['VMC'] = int(mvspc)
+                d['VAR'] = int(atkspr)
+                d.close()
+                running = False
+        pygame.draw.rect(ventana,(57,255,20),botonat3)
+        ventana.blit(textoat3,(35,410))
+
+        click = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                        running = False
+                    #Se guardan los datos en una biblioteca generado por python
+                    d = shelve.open('configuraciones')
+                    d['VAF'] = int(atkspf)
+                    d['VMF'] = int(mvspf)
+                    d['VAE'] = int(atkspe)
+                    d['VME'] = int(mvspe)
+                    d['VAL'] = int(atkspl)
+                    d['VML'] = int(mvspl)
+                    d['VAC'] = int(atkspc)
+                    d['VMC'] = int(mvspc)
+                    d['VAR'] = int(atkspr)
+                    d.close()
+                    running = False
+                if activo:
+                    if event.key == pygame.K_BACKSPACE:
+                        atkspf = atkspf[:-1]
+                    else:
+                        atkspf += event.unicode
+                elif activo1:
+                    if event.key == pygame.K_BACKSPACE:
+                        mvspf = mvspf[:-1]
+                    else:
+                        mvspf += event.unicode
+                elif activo2:
+                    if event.key == pygame.K_BACKSPACE:
+                        atkspe = atkspe[:-1]
+                    else:
+                        atkspe += event.unicode
+                elif activo3:
+                    if event.key == pygame.K_BACKSPACE:
+                        mvspe = mvspe[:-1]
+                    else:
+                        mvspe += event.unicode
+                elif activo4:
+                    if event.key == pygame.K_BACKSPACE:
+                        atkspl = atkspl[:-1]
+                    else:
+                        atkspl += event.unicode
+                elif activo5:
+                    if event.key == pygame.K_BACKSPACE:
+                        mvspl = mvspl[:-1]
+                    else:
+                        mvspl += event.unicode
+                elif activo6:
+                    if event.key == pygame.K_BACKSPACE:
+                        atkspc = atkspc[:-1]
+                    else:
+                        atkspc += event.unicode
+                elif activo7:
+                    if event.key == pygame.K_BACKSPACE:
+                        mvspc = mvspc[:-1]
+                    else:
+                        mvspc += event.unicode
+                elif activo8:
+                    if event.key == pygame.K_BACKSPACE:
+                        atkspr = atkspr[:-1]
+                    else:
+                        atkspr += event.unicode
+                    
+            if event.type ==  MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+                if input_rect.collidepoint(event.pos):
+                    activo = True
+                elif input_rect1.collidepoint(event.pos):
+                    activo1 = True
+                elif input_rect2.collidepoint(event.pos):
+                    activo2 = True
+                elif input_rect3.collidepoint(event.pos):
+                    activo3 = True
+                elif input_rect4.collidepoint(event.pos):
+                    activo4 = True
+                elif input_rect5.collidepoint(event.pos):
+                    activo5 = True
+                elif input_rect6.collidepoint(event.pos):
+                    activo6 = True
+                elif input_rect7.collidepoint(event.pos):
+                    activo7 = True
+                elif input_rect8.collidepoint(event.pos):
+                    activo8 = True
+                else:
+                    activo = False
+                    activo1 = False
+                    activo2 = False
+                    activo3 = False
+                    activo4 = False
+                    activo5 = False
+                    activo6 = False
+                    activo7 = False
+                    activo8 = False
+
+        pygame.draw.rect(ventana,color,input_rect,2)
+        pygame.draw.rect(ventana,color1,input_rect1,2)
+        pygame.draw.rect(ventana,color2,input_rect2,2)
+        pygame.draw.rect(ventana,color3,input_rect3,2)
+        pygame.draw.rect(ventana,color4,input_rect4,2)
+        pygame.draw.rect(ventana,color5,input_rect5,2)
+        pygame.draw.rect(ventana,color6,input_rect6,2)
+        pygame.draw.rect(ventana,color7,input_rect7,2)
+        pygame.draw.rect(ventana,color8,input_rect8,2)
+
+        text_surface = fuente3.render(atkspf,True,(10,10,10))
+        ventana.blit(text_surface,(input_rect.x + 5, input_rect.y + 5))
+        text_surface1 = fuente3.render(mvspf,True,(10,10,10))
+        ventana.blit(text_surface1,(input_rect1.x + 5, input_rect1.y + 5))
+        text_surface2 = fuente3.render(atkspe,True,(10,10,10))
+        ventana.blit(text_surface2,(input_rect2.x + 5, input_rect2.y + 5))
+        text_surface3 = fuente3.render(mvspe,True,(10,10,10))
+        ventana.blit(text_surface3,(input_rect3.x + 5, input_rect3.y + 5))
+        text_surface4 = fuente3.render(atkspl,True,(10,10,10))
+        ventana.blit(text_surface4,(input_rect4.x + 5, input_rect4.y + 5))
+        text_surface5 = fuente3.render(mvspl,True,(10,10,10))
+        ventana.blit(text_surface5,(input_rect5.x + 5, input_rect5.y + 5))
+        text_surface6 = fuente3.render(atkspc,True,(10,10,10))
+        ventana.blit(text_surface6,(input_rect6.x + 5, input_rect6.y + 5))
+        text_surface7 = fuente3.render(mvspc,True,(10,10,10))
+        ventana.blit(text_surface7,(input_rect7.x + 5, input_rect7.y + 5))
+        text_surface8 = fuente3.render(atkspr,True,(10,10,10))
+        ventana.blit(text_surface8,(input_rect8.x + 5, input_rect8.y + 5))
+
+        input_rect.w = max(100,text_surface.get_width() + 10)
+        input_rect1.w = max(100,text_surface1.get_width() + 10)
+        input_rect2.w = max(100,text_surface2.get_width() + 10)
+        input_rect3.w = max(100,text_surface2.get_width() + 10)
+        input_rect4.w = max(100,text_surface4.get_width() + 10)
+        input_rect5.w = max(100,text_surface5.get_width() + 10)
+        input_rect6.w = max(100,text_surface6.get_width() + 10)
+        input_rect7.w = max(100,text_surface7.get_width() + 10)
+        input_rect8.w = max(100,text_surface8.get_width() + 10)
 
 
         pygame.display.update()
@@ -189,8 +429,10 @@ def ayuda():
         escribir('+ Entre más valor tenga una torre más daño', fuente4,(10,10,10),ventana,5,240)
         escribir('infligirá.', fuente4,(10,10,10),ventana,5,255)
         escribir('+ Utiliza inteligentemente el oro, no vaya a ser', fuente4,(10,10,10),ventana,5,270)
-        escribir(' que se te acabe y no puedas defender un avatar.', fuente4,(10,10,10),ventana,5,285)
+        escribir('que se te acabe y no puedas defender un avatar.', fuente4,(10,10,10),ventana,5,285)
         escribir('un avatar.', fuente4,(10,10,10),ventana,5,300)
+        escribir('+ Puedes quitar un Rook para colocar otro', fuente4,(10,10,10),ventana,5,315)
+        escribir('mas fuerte', fuente4,(10,10,10),ventana,5,330)
         textoat1 = fuente4.render("Atrás",0,(10,10,10))
 
         mx,my = pygame.mouse.get_pos()
