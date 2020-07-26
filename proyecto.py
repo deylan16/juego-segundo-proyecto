@@ -1332,9 +1332,12 @@ def empieza(guardado):
                 muertos += 1
                 lista_avatares.remove(avatar)
                 
-        
+        if muertos == 14:
+                contadorI=False
+                ventana.blit(ganaste,(0,101))
+                
         volumen.seleccion(ventana,cursor1)
-        
+        print(muertos)
         #llama al cursor
         cursor1.sigue()
         

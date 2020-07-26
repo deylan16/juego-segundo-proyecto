@@ -13,6 +13,7 @@ espada= pygame.image.load("espada.png")
 hacha= pygame.image.load("hacha.png")
 garrote= pygame.image.load("garrote.png")
 perdiste= pygame.image.load("perdiste.png")
+ganaste= pygame.image.load("ganaste.png")
 
 class avatares(pygame.sprite.Sprite):
     def __init__(self,coords,datos,segundos):
@@ -124,29 +125,29 @@ poner_avatares = []
 segundos_entre_cada_avatar = 7
 def crea_avatar():
     for numero in range(0,15):
-        if numero <= 6:
-            sleep(segundos_entre_cada_avatar)
-        if numero > 6 and numero<= 11:
-            sleep((segundos_entre_cada_avatar//10)*7)
-        if numero > 11:
-            sleep((segundos_entre_cada_avatar//10)*4)
-        coordenadas = [(31,381),(66,381),(101,381),(138,381),(173,381)]
-        for ocupado in lista_avatares:
-            if ocupado.coords() == (31,381):
-                coordenadas.remove((31,381))
-            if ocupado.coords() == (66,381):
-                coordenadas.remove((66,381))
-            if ocupado.coords() == (101,381):
-                coordenadas.remove((101,381))
-            if ocupado.coords() == (138,381):
-                coordenadas.remove((138,381))
-            if ocupado.coords() == (173,381):
-                coordenadas.remove((173,381))
-
-        if coordenadas != []:
-            avatar_prueba = avatares(random.choice(coordenadas),aleatorio_avatar(),localtime()[5]+2)
-            lista_avatares.append(avatar_prueba)
-            poner_avatares.append(avatar_prueba)
+        if numero< 15:
+            if numero <= 6:
+                sleep(segundos_entre_cada_avatar)
+            if numero > 6 and numero<= 11:
+                sleep(segundos_entre_cada_avatar*0.7)
+            if numero > 11:
+                sleep(segundos_entre_cada_avatar*0.4)
+            coordenadas = [(31,381),(66,381),(101,381),(138,381),(173,381)]
+            for ocupado in lista_avatares:
+                if ocupado.coords() == (31,381):
+                    coordenadas.remove((31,381))
+                if ocupado.coords() == (66,381):
+                    coordenadas.remove((66,381))
+                if ocupado.coords() == (101,381):
+                    coordenadas.remove((101,381))
+                if ocupado.coords() == (138,381):
+                    coordenadas.remove((138,381))
+                if ocupado.coords() == (173,381):
+                    coordenadas.remove((173,381))
+            if coordenadas != []:
+                avatar_prueba = avatares(random.choice(coordenadas),aleatorio_avatar(),localtime()[5]+2)
+                lista_avatares.append(avatar_prueba)
+                poner_avatares.append(avatar_prueba)
     
     
 def aparecen_avatares():
