@@ -10,6 +10,16 @@ import shelve
 
 ################################################3
 #botones de los rooks
+#clase boton_rooks
+#artibutos:
+#        self.imagen_normal: imagen es esto normal
+#        self.imagen_seleccion: imagen cuando el cursor pasa por encima o la selecciona
+#        self.rect: cuadro de la imagen
+#        self.rect.left,self.rect.top: posiciona la imagen
+#metodos:
+#        cambio:cambia la imagen que se muestra
+#        selaccion(pantalla,cursor): muestra el boton en pantalla
+
 class Boton_rooks(pygame.sprite.Sprite):
     def __init__(self,imagen1,imagen2,x,y):
         self.imagen_normal = imagen1
@@ -57,6 +67,24 @@ cancelar= Boton_rooks(cancelar1,cancelar1_2,20,80)
 
 
 ####################################
+#clase roooks
+#artibutos:
+#        self.imagen_actual:imagen que se va a mostrar
+#        self.rect: cuadro de la imagen
+#        self.x:posicion en X del rook
+#        self.vida: vida del rook
+#        self.y:posicion en Y del rook
+#        self.rect.left,self.rect.top: posiciona la imagen
+#        self.lista_disparo: lista para ver si el rooks va a disparar
+#metodos:
+#        cambio:
+#              E:coordenas x y y para poner el rook
+#              S: rook con nueva posicion
+#              R: numeros enteros
+#        coords:retorna las cordenadas de el rook con pero una fila mas abajo
+#        disparos:crea el proyectil que va a disparar
+#        seleccion(pantalla,cursor): pone el rook en la pantalla
+
 #clase para poner rooks de ataque
 class rooks(pygame.sprite.Sprite):
     def __init__(self,imagen1,x,y,vida):
@@ -563,6 +591,22 @@ bola_de_agua = pygame.image.load("agua.png")
 bola_de_fuego = pygame.image.load("fuego.png")
 bola_de_roca = pygame.image.load("roca.png")
 bola_de_arena = pygame.image.load("arena.png")
+
+
+#clase proyectil
+#artibutos:
+#        self.imagen:imagen que se va a mostrar
+#        self.rect: cuadro de la imagen
+#        self.velocidad: velocidad del movimiento del proyectil
+#        self.rect.top:posicion en Y del proyectil
+#        self.rect.left:posicion en X del proyectil
+#metodos:
+#        chocan:
+#              E:coordenas x y y de un objeto
+#              S: boolean si las coordenadas dadas son las mismas que la del proyectil
+#              R: numeros enteros
+#        direcion(dirije): determina si el rpyectil se mueve para abajo o para arriba
+#        Disparo(ventana): muestra el proyectil en pantalla
 
 class proyectil(pygame.sprite.Sprite):
     def __init__(self,x,y,imagen):

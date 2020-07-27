@@ -7,14 +7,40 @@ from threading import Thread
 from cuadros import mesa
 from rooks import proyectil
 
-
+#imagenes para los ataques de lo avatres
 flecha= pygame.image.load("flecha.png")
 espada= pygame.image.load("espada.png")
 hacha= pygame.image.load("hacha.png")
 garrote= pygame.image.load("garrote.png")
+#iamgenes para mostrar se se gano o perdio
 perdiste= pygame.image.load("perdiste.png")
 ganaste= pygame.image.load("ganaste.png")
-
+#clase avatares
+#artibutos:
+#        self.velat: determina cada cuanto ataca el rook
+#        self.imagen: imagen del rooks
+#        self.imagen2: imagen 2 del rook
+#        self.listaimagenes: lista con las dos imagenes del rook
+#        self.posimagen: numero para determinar la posicion de listaimagnes
+#        self.imagenavatar:imegen que se mostrara
+#        self.rect: obtiene el rectangulo del la imagen
+#        self.lista_disparo: lista con los disparos para los taques de los avatres
+#        self.rect.top: coordenada y
+#        self.rect.left: coordenada x
+#        self.sigue: boolean si el avatar camina o no
+#        self.vida: vida del avatar
+#        self.segundos: segundos
+#        self.segundosa: segundos
+#        self.tiempopaso: determina el tiempo para moverse un fila par arriba
+#        self.dañar: determina el golpe a los rooks
+#metodos:
+#        golpe(daño): le baja la vida al avatar daño
+#       coords: retorna las coordenas del avatar
+#       cambio_imagen:cambia la imagen que se muestra
+#       get_tipo: retorna que tipo es el avatar
+#       aparece:muestra el avatar en la pantella
+#       comportamiento(tiempo): crea la animacion del avatar y el ataque de los avateres
+#       camina(tiempo): hace que el avatar se mueva una fila para arriba
 class avatares(pygame.sprite.Sprite):
     def __init__(self,coords,datos,segundos):
         self.velat = datos[5]
@@ -111,18 +137,21 @@ VMF = d['VMF']
 d.close()
 arquero= [arquero1,arquero2,5,VMF,False,VAF]
 
+#lista con los dato de cada avatar
 tipo_avatar = [canibal,leñador,arquero,escudero]
-
+#obtine un valor a aleatoreo de la lista tipo_avatar
 def aleatorio_avatar():
     return random.choice(tipo_avatar)
         
-
-lista_avatares =  []
-    
+#listas para poner avatres en la pantalla
+lista_avatares =  []   
 poner_avatares = []
 
-
+#variable para determinada cada cuanto aparecen los avatares
 segundos_entre_cada_avatar = 7
+#E:-
+#S:cracion de avatres en la lista_avatares
+#R:-
 def crea_avatar():
     for numero in range(0,15):
         if numero< 15:
@@ -149,12 +178,12 @@ def crea_avatar():
                 lista_avatares.append(avatar_prueba)
                 poner_avatares.append(avatar_prueba)
     
-    
+#crea el hilom para que aparescan los avatares  
 def aparecen_avatares():
     crea = Thread(target=crea_avatar,args=())
     crea.start()
 
-
+#obtiene las coordenadas x de los avatres puestos
 def coord_x():
     for avatar in lista_avatares:
         return avatar.rect.left

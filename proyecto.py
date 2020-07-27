@@ -10,11 +10,18 @@ from cuadros import mesa
 from avatares import *
 import shelve
 
+#variable para las monedas para comprar
 monedas_para_comprar = 100
+#variable de las monedas que aparecen aleatoreamente
 monedas = 0
+#variable para determinar cuantos avatres han muerto
 muertos = 0
 activo = True
 
+#funcion para crear monedas aleatorias
+#E:-
+#S: monedas
+#R: -
 def monedas_aleatorias():
     global monedas
     tipos = [25,50,100]
@@ -22,6 +29,7 @@ def monedas_aleatorias():
     monedas += random.choice(tipos)
     return monedas_aleatorias()
 
+#crea el hilo para generar monedas
 genera = Thread(target= monedas_aleatorias,args = ())
 genera.start()
 
@@ -65,14 +73,20 @@ def empieza(guardado):
     
     # el bucle principal del juego
     hola = True
+    #obtiene el tiempo dede que se avrio el juego
     empieza_0 = pygame.time.get_ticks()
+    #variable para deter cuando se gana o pierde
     contadorI = True
+    #variabke para contar los segundos
     aux=1
+    #bandera para guardar el tiempo cuando se gana
     acaba = 0
+    #hace sonar la musica de fondo
     pygame.mixer.music.play(4)
     while hola:
-        
+        #relos para la llamdas a l ciclo por segundo
         reloj.tick(60)
+        #bandero
         global escogido
         #obtiene el tiepo
         tiempo = abs((empieza_0 -pygame.time.get_ticks()))//1000
@@ -1329,14 +1343,16 @@ def empieza(guardado):
         contador = Fuenteti.render("Tiempo : "+str(aux),0,(255,255,255))
         ventana.blit(contador,(0,415))
 
+        #desaparece y cuanta los avatares muertos
         for avatar in lista_avatares:
             if avatar.vida <= 0:
                 muertos += 1
                 lista_avatares.remove(avatar)
-                
+        #muestra cuando se gano
         if muertos == 14:
                 contadorI=False
                 ventana.blit(ganaste,(0,101))
+        #guarda el tiempo cuando se gano
         if muertos == 14 and acaba == 0:
                 d = shelve.open('HoF')
                 d['resultados'] += [aux]
@@ -1344,7 +1360,6 @@ def empieza(guardado):
                 acaba = 1
                 
         volumen.seleccion(ventana,cursor1)
-        print(muertos)
         #llama al cursor
         cursor1.sigue()
         

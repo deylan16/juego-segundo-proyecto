@@ -4,7 +4,16 @@ from time import *
 from threading import Thread
 
 
-#botones de los cuadros
+
+#clase Boton_cuadros
+#artibutos:
+#        self.imagen_actual: imagen que se muestra
+#        self.x:posicion en x
+#        self.y:posicion en y
+#        self.rect: cuadro de la imagen
+#        self.rect.left,self.rect.top: posiciona la imagen
+#metodos:
+#        selaccion(pantalla,cursor): muestra el boton en pantalla
 class Boton_cuadros(pygame.sprite.Sprite):
     def __init__(self,imagen1,x,y):
         self.imagen_actual = imagen1
@@ -31,6 +40,10 @@ cuadro_o_con_rock_rooks = pygame.image.load("cuadro o con rock rooks.png")
 cuadro_o_con_sand_rooks = pygame.image.load("cuadro o con sand rooks.png")
 cuadro_o_con_water_rooks = pygame.image.load("cuadro o con water rooks.png")
 
+
+#E:valor para determinar como se establecera la mesa
+#S: matriz de 9x5
+#R:-
 def establece(guardado):
     if guardado == 'ninguno':
         return [[cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro,cuadro_oscuro],
@@ -117,11 +130,16 @@ cuadro_8_4= Boton_cuadros(cuadro_oscuro ,173,381)
 
 ################################################3
 
+#E:fila,columna y como se establecera la posicion
+#S:posicion en la mes acambiada
+#R:-
 def cambio_mesa(i,j,estado):
             mesa[i][j] = estado
 
+#imagenes para el boton de la musica
 volumenS = pygame.image.load('volumenS.png')
 volumenN = pygame.image.load('volumenN.png')
+#establece el boton de la musica
 volumen= Boton_cuadros(volumenS ,0,0)
 
 
