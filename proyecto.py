@@ -8,6 +8,7 @@ from cursor import *
 from cuadros import *
 from cuadros import mesa
 from avatares import *
+import shelve
 
 monedas_para_comprar = 100
 monedas = 0
@@ -67,6 +68,7 @@ def empieza(guardado):
     empieza_0 = pygame.time.get_ticks()
     contadorI = True
     aux=1
+    acaba = 0
     pygame.mixer.music.play(4)
     while hola:
         
@@ -1335,6 +1337,11 @@ def empieza(guardado):
         if muertos == 14:
                 contadorI=False
                 ventana.blit(ganaste,(0,101))
+        if muertos == 14 and acaba == 0:
+                d = shelve.open('HoF')
+                d['resultados'] += [aux]
+                d.close()
+                acaba = 1
                 
         volumen.seleccion(ventana,cursor1)
         print(muertos)

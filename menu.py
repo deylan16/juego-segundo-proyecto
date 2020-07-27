@@ -1,5 +1,5 @@
 import shelve
-import pygame,sys 
+import pygame,sys,os
 from proyecto import *
 #ventana de pygame
 mainClock = pygame.time.Clock()
@@ -25,7 +25,7 @@ click = False
 
 #Definicio de la ventana incial
 def menu_inicio():
-    user_text = 'Tu Nombre!'
+    nombre_usuario = 'Tu Nombre!'
 
     input_rect = pygame.Rect(150, 0,185,25)
     color_activo = pygame.Color('lightskyblue3')
@@ -66,6 +66,9 @@ def menu_inicio():
         boton6 = pygame.Rect(200, 400, 60, 30)
         if boton1.collidepoint((mx,my)):
             if click:
+                d = shelve.open('HoF')
+                d['resultados'] += [nombre_usuario]
+                d.close()
                 juego()
         if boton2.collidepoint((mx,my)):
             if click:
@@ -107,9 +110,9 @@ def menu_inicio():
                     sys.exit()
                 if activo:
                     if event.key == pygame.K_BACKSPACE:
-                        user_text = user_text[:-1]
+                        nombre_usuario = nombre_usuario[:-1]
                     else:
-                        user_text += event.unicode
+                        nombre_usuario += event.unicode
             if event.type ==  MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
@@ -121,7 +124,7 @@ def menu_inicio():
         pygame.draw.rect(ventana,color,input_rect,2)
 
     
-        text_surface = fuente3.render(user_text,True,(10,10,10))
+        text_surface = fuente3.render(nombre_usuario,True,(10,10,10))
         ventana.blit(text_surface,(input_rect.x + 5, input_rect.y + 5))
 
         input_rect.w = max(100,text_surface.get_width() + 10)
@@ -397,7 +400,33 @@ def famehall():
     while running:
         ventana.fill((0,170,228))
         
+        d = shelve.open('HoF')
+        ganadores = d['resultados']
+        d.close()
+    
         escribir('Salon', fuente,(255,0,0),ventana,20,20)
+        escribir('Ganadores!:', fuente3,(255,255,0),ventana,0,70)
+      #  escribir(str(ganadores[0]), fuente5,(10,10,10),ventana,0,pos)
+        textoat4 = fuente4.render("Atrás",0,(10,10,10))
+
+        mx,my = pygame.mouse.get_pos()
+
+        botonat4 = pygame.Rect(20, 400, 60, 30)
+
+        pos=100
+        while ganadores != []:
+            escribir(str(ganadores[0]) + ' en ' + str(ganadores[1]) + ' segundos', fuente5,(10,10,10),ventana,0,pos)
+            ganadores = ganadores[2:]
+            pos+=30
+
+            
+        if botonat4.collidepoint((mx,my)):
+            if click:
+                running = False
+        pygame.draw.rect(ventana,(57,255,20),botonat4)
+        ventana.blit(textoat4,(35,410))
+
+        click = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -405,6 +434,9 @@ def famehall():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                         running = False
+            if event.type ==  MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
 
 
         pygame.display.update()
